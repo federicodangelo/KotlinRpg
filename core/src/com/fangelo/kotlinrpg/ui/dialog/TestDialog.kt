@@ -13,7 +13,4 @@ class TestDialog : Dialog("Nice dialog") {
         button("Button 3")
     }
 
-    override fun result(obj: Any?) {
-        Gdx.app.log("NANA", "Dialog closed!")
-    }
 }

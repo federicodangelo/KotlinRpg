@@ -1,51 +1,49 @@
 package com.fangelo.kotlinrpg.ui.screen
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.scenes.scene2d.Actor
-import com.badlogic.gdx.scenes.scene2d.ui.Button
-import com.badlogic.gdx.scenes.scene2d.ui.Cell
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.fangelo.kotlinrpg.PlatformAdapter
 import com.fangelo.libraries.ui.Screen
+import ktx.actors.onChange
 
 class AboutScreen : Screen() {
-
-    private val closeButton: Button
 
     init {
         setBackground("panel-brown")
 
-        add("Crating and Dungeons v" + PlatformAdapter.instance!!.version).pad(10f)
-        row()
-        addLinkButton("Developed using libgdx", "https://libgdx.badlogicgames.com/").pad(10f)
-        row()
-        addLinkButton("Using free assets from Kenney", "http://kenney.nl/").pad(10f)
-        row()
-        addLinkButton("Using icons from Game-icons.net", "http://game-icons.net/").pad(10f)
-        row()
+        addTitle("Crating and Dungeons v" + PlatformAdapter.instance.version)
 
-        closeButton = TextButton("Close", skin)
+        addLinkButton("Developed using libgdx", "https://libgdx.badlogicgames.com/")
+        addLinkButton("Using free assets from Kenney", "http://kenney.nl/")
+        addLinkButton("Using icons from Game-icons.net", "http://game-icons.net/")
 
-        closeButton.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                onBackButtonPressed()
-            }
-        })
+        addCloseButton()
+    }
+
+    private fun addCloseButton() {
+        val closeButton = TextButton("Close", skin)
+
+        closeButton.onChange {
+            onBackButtonPressed()
+        }
 
         add(closeButton).padTop(20f)
     }
 
-    private fun addLinkButton(text: String, link: String): Cell<TextButton> {
-        val button = TextButton("$text\n($link)", skin)
-        button.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                if (Gdx.net != null) {
-                    Gdx.net.openURI(link)
-                }
-            }
-        })
+    private fun addTitle(title: String) {
+        add(title).pad(10f)
+        row()
+    }
 
-        return add(button)
+    private fun addLinkButton(text: String, link: String) {
+        val button = TextButton("$text\n($link)", skin)
+        button.onChange {
+            if (Gdx.net != null) {
+                Gdx.net.openURI(link)
+            }
+        }
+
+        add(button).pad(10f)
+        row()
     }
 }

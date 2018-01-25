@@ -1,68 +1,35 @@
 package com.fangelo.kotlinrpg.ui.screen
 
-import com.badlogic.gdx.scenes.scene2d.Actor
-import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 import com.fangelo.kotlinrpg.ui.dialog.TestDialog
 import com.fangelo.libraries.ui.Screen
 import com.fangelo.libraries.ui.ScreenManager
+import ktx.actors.onChange
 
 class MainMenuScreen : Screen() {
-
-    private val settingsButton: Button
-    private val playButton: Button
-    private val aboutButton: Button
-    private val testDialogButton: Button;
 
     init {
         setBackground("panel-brown")
 
-        add("Kotlin RPG!!").padBottom(20f)
+        addTitle("Kotlin RPG!!")
+
+        addTextButton("Play", { /*ScreenManager.push(Screens.saveGameSelectorScreen)*/ })
+        addTextButton("About..", { ScreenManager.push(Screens.aboutScreen) })
+        addTextButton("Settings", { ScreenManager.push(Screens.settingsScreen) })
+        addTextButton("Test Dialog", { ScreenManager.show(TestDialog()) })
+    }
+
+    private fun addTitle(title: String) {
+        add(title).padBottom(20f)
         row()
+    }
 
-        playButton = TextButton("Play", skin)
+    private fun addTextButton(text: String, listener: (() -> Unit)) {
+        val button = TextButton(text, skin)
 
-        playButton.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                //ScreenManager.push(Screens.saveGameSelectorScreen);
-            }
-        })
+        button.onChange(listener)
 
-        add(playButton).minWidth(150f).pad(10f)
+        add(button).minWidth(150f).pad(10f)
         row()
-
-        aboutButton = TextButton("About..", skin)
-
-        aboutButton.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                ScreenManager.push(Screens.aboutScreen)
-            }
-        })
-
-        add(aboutButton).minWidth(150f).pad(10f)
-        row()
-
-        settingsButton = TextButton("Settings", skin)
-
-        settingsButton.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                ScreenManager.push(Screens.settingsScreen)
-            }
-        })
-
-        add(settingsButton).minWidth(150f).pad(10f)
-        row()
-
-        testDialogButton = TextButton("Test Dialog", skin)
-
-        testDialogButton.addListener(object : ChangeListener() {
-            override fun changed(event: ChangeListener.ChangeEvent, actor: Actor) {
-                ScreenManager.show(TestDialog())
-            }
-        })
-
-        add(testDialogButton).minWidth(150f).pad(10f)
-
     }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScalingViewport
 import com.fangelo.kotlinrpg.settings.Settings
 import com.fangelo.libraries.glprofiler.GLProfiler
+import ktx.assets.file
 import ktx.log.info
 import java.util.*
 
@@ -61,8 +62,8 @@ object ScreenManager {
 
     init {
 
-        textureAtlas = TextureAtlas(Gdx.files.internal("ui/ui.atlas"))
-        skin = Skin(Gdx.files.internal("ui/ui.json"), textureAtlas)
+        textureAtlas = TextureAtlas(file("ui/ui.atlas"));
+        skin = Skin(file("ui/ui.json"), textureAtlas)
         stageViewport = ScalingViewport(Scaling.stretch, (Gdx.graphics.width / 2).toFloat(), (Gdx.graphics.height / 2).toFloat())
         spriteBatch = SpriteBatch()
 

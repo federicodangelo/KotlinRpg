@@ -9,13 +9,17 @@ open class PlatformAdapter {
         instance = this
     }
 
+    open fun dispose() {
+
+    }
+
     companion object {
 
-        var instance: PlatformAdapter? = null
+        lateinit var instance: PlatformAdapter
             private set
 
         fun dispose() {
-            instance = null
+            instance.dispose()
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.fangelo.libraries.ui
 
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.utils.Pools
+import ktx.log.error
 
 abstract class Dialog(title: String) : com.badlogic.gdx.scenes.scene2d.ui.Dialog(title, ScreenManager.skin, "dialog") {
 
@@ -11,15 +11,17 @@ abstract class Dialog(title: String) : com.badlogic.gdx.scenes.scene2d.ui.Dialog
         isMovable = false
     }
 
-    override fun result(obj: Any?) {
+    final override fun result(obj: Any?) {
 
         val closeEvent = Pools.obtain(DialogCloseListener.DialogCloseEvent::class.java)
 
-        if (obj is DialogResult) {
-            closeEvent.result = obj
-        } else {
-            Gdx.app.error("DIALOG", "Expected DialogResult, but received $obj")
-            closeEvent.result = DialogResult.None
+        when (obj) {
+            null -> closeEvent.result = DialogResult.None
+            is DialogResult -> closeEvent.result = obj
+            else -> {
+                error("DIALOG") { "Expected DialogResult, but received $obj" }
+                closeEvent.result = DialogResult.None
+            }
         }
         fire(closeEvent)
 
