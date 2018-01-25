@@ -3,11 +3,8 @@ package com.fangelo.libraries.glprofiler
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.profiling.GLProfiler
 
-object GLProfilerSingleton {
-
-    val profiler : GLProfiler
-
+object GLProfiler : GLProfiler(Gdx.graphics) {
     init {
-        profiler = GLProfiler(Gdx.graphics)
+        enable()
     }
 }
