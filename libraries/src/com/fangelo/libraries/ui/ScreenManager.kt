@@ -225,19 +225,13 @@ object ScreenManager {
 
     fun show(dialog: Dialog): Dialog {
         activeDialog = dialog
-
-        registerDialogClosedCallback(dialog)
-
         dialog.internalShow(this)
         return dialog
     }
 
-    private fun registerDialogClosedCallback(dialog: Dialog) {
-        dialog.onClosed["__screenmanager_close"] = {
-            if (activeDialog === dialog) {
-                activeDialog = null
-            }
-            dialog.onClosed -= "__screenmanager_close"
+    internal fun internalDialogClosed(dialog: Dialog) {
+        if (activeDialog === dialog) {
+            activeDialog = null
         }
     }
 }

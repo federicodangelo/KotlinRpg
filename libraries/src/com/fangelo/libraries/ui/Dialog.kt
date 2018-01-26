@@ -35,6 +35,7 @@ abstract class Dialog(title: String) {
 
     fun close(result : DialogResult) {
         if (!gdxDialog.closing) {
+            ScreenManager.internalDialogClosed(this)
             onClosed(result)
             gdxDialog.hide()
         }
@@ -61,6 +62,7 @@ abstract class Dialog(title: String) {
 
         override fun result(res: Any?) {
             closing = true
+            ScreenManager.internalDialogClosed(dialog)
             when (res) {
                 is DialogResult -> dialog.onClosed(res)
                 else -> dialog.onClosed(DialogResult.None)

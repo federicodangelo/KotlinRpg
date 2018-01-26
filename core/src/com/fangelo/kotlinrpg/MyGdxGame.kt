@@ -37,8 +37,9 @@ class MyGdxGame : KtxApplicationAdapter {
                         ScreenManager.pop()
                     } else {
                         ScreenManager.show(ConfirmDialog("Exit", "Exit game?")).onClosed += { res ->
-                            if (res == DialogResult.Ok)
+                            if (res == DialogResult.Yes) {
                                 Gdx.app.exit()
+                            }
                         }
                     }
                     return true
