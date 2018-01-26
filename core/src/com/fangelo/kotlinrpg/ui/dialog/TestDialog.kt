@@ -1,6 +1,5 @@
 package com.fangelo.kotlinrpg.ui.dialog
 
-import com.badlogic.gdx.Gdx
 import com.fangelo.libraries.ui.Dialog
 
 class TestDialog : Dialog("Nice dialog") {

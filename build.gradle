@@ -40,7 +40,6 @@ allprojects {
 project(":desktop") {
     apply plugin: "kotlin"
 
-
     dependencies {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
@@ -73,6 +72,29 @@ project(":android") {
 project(":core") {
     apply plugin: "kotlin"
 
+    dependencies {
+        compile project(":libraries")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+        compile "io.github.libktx:ktx-app:$ktxVersion"
+        compile "io.github.libktx:ktx-actors:$ktxVersion"
+        compile "io.github.libktx:ktx-ashley:$ktxVersion"
+        compile "io.github.libktx:ktx-assets:$ktxVersion"
+        compile "io.github.libktx:ktx-async:$ktxVersion"
+        compile "io.github.libktx:ktx-collections:$ktxVersion"
+        compile "io.github.libktx:ktx-inject:$ktxVersion"
+        compile "io.github.libktx:ktx-log:$ktxVersion"
+        compile "io.github.libktx:ktx-math:$ktxVersion"
+        compile "io.github.libktx:ktx-scene2d:$ktxVersion"
+    }
+}
+
+
+project(":libraries") {
+    apply plugin: "kotlin"
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"

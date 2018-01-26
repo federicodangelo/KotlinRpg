@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ScalingViewport
-import com.fangelo.kotlinrpg.settings.Settings
+import com.fangelo.libraries.debug.DebugSettings
 import com.fangelo.libraries.glprofiler.GLProfiler
 import ktx.assets.file
 import ktx.log.info
@@ -50,15 +50,6 @@ object ScreenManager {
 
     private var statsUpdateTime: Float = 0.0f
     private var statsUpdateTimeFrames: Int = 0
-
-    private val dialogCloseListener = object : DialogCloseListener() {
-        override fun closed(event: DialogCloseListener.DialogCloseEvent, dialog: Dialog) {
-            if (activeDialog === dialog) {
-                activeDialog = null
-            }
-            dialog.removeListener(this)
-        }
-    }
 
     init {
 
@@ -109,7 +100,7 @@ object ScreenManager {
         stageViewport.setWorldSize((width / 2).toFloat(), (height / 2).toFloat())
         stageViewport.update(width, height, true)
 
-        activeScreen?.onResize(width, height)
+        activeScreen?.internalResize(width, height)
     }
 
     fun updateAndDraw() {
@@ -122,7 +113,7 @@ object ScreenManager {
         stageNotifications.act(Gdx.graphics.deltaTime)
         stageNotifications.draw()
 
-        if (Settings.showFps) {
+        if (DebugSettings.showFps) {
             updateDebug(Gdx.graphics.deltaTime)
             stageDebug.act(Gdx.graphics.deltaTime)
             stageDebug.draw()
@@ -167,15 +158,13 @@ object ScreenManager {
         val currentScreen = this.activeScreen
 
         if (currentScreen != null) {
-            currentScreen.onHide()
-            stageTable.removeActor(currentScreen)
+            currentScreen.internalHide(stageTable)
         }
 
         screensStack.clear()
 
         activeScreen = screen
-        screen.onShow()
-        stageTable.addActor(screen)
+        screen.internalShow(stageTable)
     }
 
     fun push(screen: Screen) {
@@ -183,14 +172,12 @@ object ScreenManager {
         val currentScreen = this.activeScreen
 
         if (currentScreen != null) {
-            currentScreen.onHide()
-            stageTable.removeActor(currentScreen)
+            currentScreen.internalHide(stageTable)
             screensStack.push(currentScreen)
         }
 
         activeScreen = screen
-        screen.onShow()
-        stageTable.addActor(screen)
+        screen.internalShow(stageTable)
     }
 
     fun canPop(): Boolean {
@@ -199,19 +186,14 @@ object ScreenManager {
 
     fun pop() {
 
-        val currentScreen = this.activeScreen
+        if (!canPop())
+            return
 
-        if (currentScreen != null) {
-            currentScreen.onHide()
-            stageTable.removeActor(currentScreen)
-        }
+        activeScreen?.internalHide(stageTable)
 
         val newActiveScreen = screensStack.pop()
 
-        if (newActiveScreen != null) {
-            newActiveScreen.onShow()
-            stageTable.addActor(newActiveScreen)
-        }
+        newActiveScreen?.internalShow(stageTable)
 
         activeScreen = newActiveScreen
     }
@@ -243,17 +225,19 @@ object ScreenManager {
 
     fun show(dialog: Dialog): Dialog {
         activeDialog = dialog
-        dialog.addListener(dialogCloseListener)
-        dialog.show(stage)
+
+        registerDialogClosedCallback(dialog)
+
+        dialog.internalShow(this)
         return dialog
     }
 
-    fun showWithoutFadeIn(dialog: Dialog): Dialog {
-        activeDialog = dialog
-        dialog.addListener(dialogCloseListener)
-        dialog.show(stage, null)
-        dialog.setPosition(Math.round((stage.width - dialog.width) / 2).toFloat(), Math.round((stage.height - dialog.height) / 2).toFloat())
-        return dialog
+    private fun registerDialogClosedCallback(dialog: Dialog) {
+        dialog.onClosed["__screenmanager_close"] = {
+            if (activeDialog === dialog) {
+                activeDialog = null
+            }
+            dialog.onClosed -= "__screenmanager_close"
+        }
     }
-
 }

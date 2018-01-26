@@ -17,16 +17,15 @@ class LoadingWorldDialog : Dialog("Loading") {
     }/*World world*/
 
     override fun act(delta: Float) {
-        super.act(delta)
         //if (!hidding && world.getWorldGenerator().isTasksQueueEmpty()) {
         //	hidding = true;
         //	result(DialogResult.Ok);
-        //	hide();
+        //	internalHide();
         //} else {
         //	waitFramesBeforeBlocking--;
         //	if (waitFramesBeforeBlocking < 0)
         //		world.getWorldGenerator().waitTasksQueueEmpty();
         //}
-        result(DialogResult.Ok)
+        close(DialogResult.Ok)
     }
 }

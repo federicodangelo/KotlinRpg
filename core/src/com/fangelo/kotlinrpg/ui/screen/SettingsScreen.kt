@@ -3,7 +3,7 @@ package com.fangelo.kotlinrpg.ui.screen
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.fangelo.kotlinrpg.settings.Settings
+import com.fangelo.libraries.debug.DebugSettings
 import com.fangelo.libraries.ui.Screen
 import ktx.actors.onChange
 
@@ -17,7 +17,7 @@ class SettingsScreen : Screen() {
 
         addTitle("Settings")
 
-        addCheckbox("Show FPS / Stats", Settings.showFps, { button -> Settings.showFps = button.isChecked })
+        addCheckbox("Show FPS / Stats", DebugSettings.showFps, { button -> DebugSettings.showFps = button.isChecked })
 
         addCloseButton()
     }
@@ -32,7 +32,7 @@ class SettingsScreen : Screen() {
 
     private fun addCloseButton() {
         val closeButton = TextButton("Close", skin)
-        closeButton.onChange { onBackButtonPressed() }
+        closeButton.onChange { close() }
         settingsContainer.add(closeButton).padTop(20f)
     }
 

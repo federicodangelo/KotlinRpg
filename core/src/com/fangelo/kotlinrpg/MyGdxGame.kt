@@ -2,7 +2,9 @@ package com.fangelo.kotlinrpg
 
 import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.GL20
+import com.fangelo.kotlinrpg.ui.dialog.ConfirmDialog
 import com.fangelo.kotlinrpg.ui.screen.Screens
+import com.fangelo.libraries.ui.DialogResult
 import com.fangelo.libraries.ui.ScreenManager
 import ktx.app.KtxApplicationAdapter
 
@@ -30,9 +32,15 @@ class MyGdxGame : KtxApplicationAdapter {
         //inputMultiplexer.addProcessor(worldInputHandler) //base later
         inputMultiplexer.addProcessor(object : InputAdapter() {
             override fun keyDown(keycode: Int): Boolean {
-                if (keycode == Input.Keys.BACK) {
-                    if (ScreenManager.activeScreen != null)
-                        ScreenManager.activeScreen!!.onBackButtonPressed()
+                if (keycode == Input.Keys.BACK || keycode == Input.Keys.ESCAPE) {
+                    if (ScreenManager.canPop()) {
+                        ScreenManager.pop()
+                    } else {
+                        ScreenManager.show(ConfirmDialog("Exit", "Exit game?")).onClosed += { res ->
+                            if (res == DialogResult.Ok)
+                                Gdx.app.exit()
+                        }
+                    }
                     return true
                 }
                 return false
@@ -45,8 +53,8 @@ class MyGdxGame : KtxApplicationAdapter {
 
         ScreenManager.resize(width, height)
 
-        //world.resize(width, height)
-        //super.resize(width, height)
+        //world.internalResize(width, height)
+        //super.internalResize(width, height)
     }
 
     override fun render() {

@@ -24,7 +24,7 @@ class AboutScreen : Screen() {
         val closeButton = TextButton("Close", skin)
 
         closeButton.onChange {
-            onBackButtonPressed()
+            close()
         }
 
         add(closeButton).padTop(20f)
