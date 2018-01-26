@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+task buildAssets(type:JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+
+	main = "com.fangelo.rawassets.RawAssetsBuilder"
+
+	workingDir = "raw-assets"
+}

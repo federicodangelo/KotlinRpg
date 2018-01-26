@@ -1,1 +1,1 @@
-include 'desktop', 'android', 'libraries', 'core'
+include 'desktop', 'android', 'libraries', 'core', 'rawassets'
