@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fangelo.kotlinrpg" >
 
-    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="25" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
     <application
         android:allowBackup="true"
