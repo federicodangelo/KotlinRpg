@@ -3,7 +3,7 @@ package com.fangelo.kotlinrpg
 import com.badlogic.gdx.*
 import com.badlogic.gdx.graphics.GL20
 import com.fangelo.kotlinrpg.ui.dialog.ConfirmDialog
-import com.fangelo.kotlinrpg.ui.screen.Screens
+import com.fangelo.kotlinrpg.ui.screen.MainMenuScreen
 import com.fangelo.libraries.ui.DialogResult
 import com.fangelo.libraries.ui.ScreenManager
 import ktx.app.KtxApplicationAdapter
@@ -16,7 +16,7 @@ class MyGdxGame : KtxApplicationAdapter {
     }
 
     private fun showFirstScreen() {
-        ScreenManager.show(Screens.mainMenuScreen)
+        ScreenManager.show(MainMenuScreen())
     }
 
     private fun initInput() {

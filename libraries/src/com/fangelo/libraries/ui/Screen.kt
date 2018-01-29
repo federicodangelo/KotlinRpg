@@ -11,14 +11,20 @@ abstract class Screen {
 
     protected val skin: Skin
 
-    private val mainTable = Table()
+    private val mainTable: CustomTable
+
+    val width : Float
+        get() = mainTable.width
+
+    val height : Float
+        get() = mainTable.height
 
     init {
+        mainTable = CustomTable(this)
         mainTable.setFillParent(true)
         skin = ScreenManager.skin
         mainTable.skin = ScreenManager.skin
     }
-
 
     internal fun internalShow(stageTable: Table) {
         stageTable.addActor(mainTable)
@@ -70,4 +76,17 @@ abstract class Screen {
     protected fun row() {
         mainTable.row()
     }
+
+    protected open fun onLayout() {
+
+    }
+
+    private class CustomTable(val screen: Screen) : Table() {
+
+        override fun layout() {
+            super.layout()
+            screen.onLayout()
+        }
+    }
+
 }

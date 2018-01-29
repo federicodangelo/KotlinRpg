@@ -1,6 +1,7 @@
 package com.fangelo.kotlinrpg.ui.screen
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.fangelo.kotlinrpg.ui.dialog.LoadingGameDialog
 import com.fangelo.kotlinrpg.ui.dialog.TestDialog
 import com.fangelo.libraries.ui.Screen
 import com.fangelo.libraries.ui.ScreenManager
@@ -13,10 +14,26 @@ class MainMenuScreen : Screen() {
 
         addTitle("Kotlin RPG!!")
 
-        addTextButton("Play", { /*ScreenManager.push(Screens.saveGameSelectorScreen)*/ })
-        addTextButton("About..", { ScreenManager.push(Screens.aboutScreen) })
-        addTextButton("Settings", { ScreenManager.push(Screens.settingsScreen) })
-        addTextButton("Test Dialog", { ScreenManager.show(TestDialog()) })
+        addTextButton("Play", { loadGame() })
+        addTextButton("About..", { showAboutScreen() })
+        addTextButton("Settings", { showSettingsScreen() })
+        addTextButton("Test Dialog", { showTestDialog() })
+    }
+
+    private fun loadGame() {
+        ScreenManager.show(LoadingGameDialog())
+    }
+
+    private fun showTestDialog() {
+        ScreenManager.show(TestDialog())
+    }
+
+    private fun showSettingsScreen() {
+        ScreenManager.push(SettingsScreen())
+    }
+
+    private fun showAboutScreen() {
+        ScreenManager.push(AboutScreen())
     }
 
     private fun addTitle(title: String) {
