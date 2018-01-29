@@ -41,7 +41,7 @@ abstract class Dialog(title: String) {
         }
     }
 
-    open fun act(delta: Float) {
+    open fun onUpdate(deltaTime: Float) {
 
     }
 
@@ -79,7 +79,7 @@ abstract class Dialog(title: String) {
         override fun act(delta: Float) {
             super.act(delta)
             if (!closing)
-                dialog.act(delta)
+                dialog.onUpdate(delta)
         }
     }
 }

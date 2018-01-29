@@ -3,6 +3,8 @@ package com.fangelo.kotlinrpg.ui.screen
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup
+import com.fangelo.kotlinrpg.Globals
+import com.fangelo.kotlinrpg.game.Game
 import com.fangelo.libraries.ui.Screen
 import com.fangelo.libraries.ui.ScreenManager
 import ktx.actors.onChange
@@ -15,7 +17,6 @@ class InGameScreen : Screen() {
     private val bottomLeftContainer: Table
 
     private val container: WidgetGroup
-
 
     init {
 
@@ -31,7 +32,6 @@ class InGameScreen : Screen() {
         container.addActor(topRightContainer)
         container.addActor(bottomRightContainer)
         container.addActor(bottomLeftContainer)
-
 
         addExitButton()
     }

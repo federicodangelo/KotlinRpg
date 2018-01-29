@@ -52,6 +52,10 @@ abstract class Screen {
         //Called when the screen is resized
     }
 
+    protected open fun onUpdate(deltaTime : Float) {
+
+    }
+
     fun close() {
         if (ScreenManager.activeScreen != this) {
             error { "Cannot close non-top screen" }
@@ -86,6 +90,11 @@ abstract class Screen {
         override fun layout() {
             super.layout()
             screen.onLayout()
+        }
+
+        override fun act(delta: Float) {
+            super.act(delta)
+            screen.onUpdate(delta)
         }
     }
 

@@ -15,7 +15,7 @@ public class RawAssetsBuilder {
 		packDefaultTextures();
 	}
 
-	static public void packUITextures() {
+	private static void packUITextures() {
 
 		TexturePacker.Settings settings = new TexturePacker.Settings();
 
@@ -32,7 +32,7 @@ public class RawAssetsBuilder {
 		TexturePacker.process(settings, "ui", REAL_ASSETS_PATH + "ui", "ui");
 	}
 
-	static public void packDefaultTextures() {
+	private static void packDefaultTextures() {
 
 		TexturePacker.Settings settings = new TexturePacker.Settings();
 
@@ -43,6 +43,8 @@ public class RawAssetsBuilder {
 		settings.useIndexes = false;
 		settings.maxWidth = settings.maxHeight = 1024;
 		settings.duplicatePadding = true;
+		settings.filterMag = Texture.TextureFilter.Linear;
+		settings.filterMin = Texture.TextureFilter.Linear;
 
 		TexturePacker.process(settings, "images", REAL_ASSETS_PATH + "images", "images");
 	}

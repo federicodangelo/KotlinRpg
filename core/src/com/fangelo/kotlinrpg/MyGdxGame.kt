@@ -51,25 +51,29 @@ class MyGdxGame : KtxApplicationAdapter {
     }
 
     override fun resize(width: Int, height: Int) {
-
         ScreenManager.resize(width, height)
-
-        //world.internalResize(width, height)
-        //super.internalResize(width, height)
+        Globals.activeGame?.resize(width, height)
     }
 
     override fun render() {
-        //Draw
+        clearScreen()
+
+        drawGame()
+
+        drawUI()
+    }
+
+    private fun drawUI() {
+        ScreenManager.updateAndDraw()
+    }
+
+    private fun drawGame() {
+        Globals.activeGame?.update(Gdx.graphics.deltaTime)
+    }
+
+    private fun clearScreen() {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-
-        //if (world.isInitialized()) {
-        //    //Draw world
-        //    world.draw()
-        //}
-
-        //Draw UI
-        ScreenManager.updateAndDraw()
     }
 
     override fun dispose() {

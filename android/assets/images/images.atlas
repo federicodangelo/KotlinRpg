@@ -1,8 +1,8 @@
 
 images.png
-size: 64,32
+size: 512,128
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 empty
   rotate: false
@@ -13,15 +13,22 @@ empty
   index: -1
 floor-dirt-1
   rotate: false
-  xy: 19, 1
+  xy: 93, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 floor-dirt-2
   rotate: false
-  xy: 37, 1
+  xy: 185, 1
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: -1
+player
+  rotate: false
+  xy: 277, 1
+  size: 90, 90
+  orig: 90, 90
   offset: 0, 0
   index: -1
