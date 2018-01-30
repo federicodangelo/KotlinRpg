@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.fangelo.kotlinrpg.game.components.Transform
 import com.fangelo.kotlinrpg.game.components.Visual
 import ktx.ashley.allOf
@@ -88,8 +89,24 @@ class RenderSystem : EntitySystem(), Camera {
 
             transform = this.transform.get(e)
             visual = this.visual.get(e)
+            val texture = visual.texture;
 
-            batch.draw(visual.texture, transform.x - visual.width * 0.5f, transform.y - visual.height * 0.5f, visual.width, visual.height)
+            var targetX = transform.x - visual.width * 0.5f
+            var targetY = transform.y - visual.height * 0.5f
+            var width = visual.width
+            var height = visual.height
+
+            if (texture is TextureAtlas.AtlasRegion) {
+
+                width *= texture.packedWidth.toFloat() / texture.originalWidth.toFloat()
+                height *= texture.packedHeight.toFloat() / texture.originalHeight.toFloat()
+
+                targetX += texture.offsetX / texture.originalWidth.toFloat()
+                targetY += texture.offsetY / texture.originalHeight.toFloat()
+
+            }
+
+            batch.draw(texture, targetX, targetY, width, height)
         }
     }
 

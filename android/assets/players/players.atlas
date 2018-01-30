@@ -1,0 +1,1252 @@
+
+players.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+player-cast-east-0
+  rotate: false
+  xy: 382, 359
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-slash-east-0
+  rotate: false
+  xy: 382, 359
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-walk-east-0
+  rotate: false
+  xy: 382, 359
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-east-1
+  rotate: false
+  xy: 556, 359
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-east-2
+  rotate: false
+  xy: 171, 3
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-east-3
+  rotate: false
+  xy: 183, 207
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-east-4
+  rotate: false
+  xy: 857, 462
+  size: 35, 48
+  orig: 64, 64
+  offset: 14, 2
+  index: -1
+player-cast-east-5
+  rotate: false
+  xy: 894, 462
+  size: 35, 48
+  orig: 64, 64
+  offset: 14, 2
+  index: -1
+player-cast-east-6
+  rotate: false
+  xy: 189, 157
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-north-0
+  rotate: false
+  xy: 196, 107
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-slash-north-0
+  rotate: false
+  xy: 196, 107
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-north-1
+  rotate: false
+  xy: 200, 57
+  size: 29, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-north-2
+  rotate: false
+  xy: 203, 7
+  size: 29, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-north-3
+  rotate: false
+  xy: 476, 410
+  size: 34, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-north-6
+  rotate: false
+  xy: 476, 410
+  size: 34, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-north-4
+  rotate: false
+  xy: 48, 462
+  size: 44, 48
+  orig: 64, 64
+  offset: 10, 2
+  index: -1
+player-cast-north-5
+  rotate: false
+  xy: 2, 360
+  size: 44, 48
+  orig: 64, 64
+  offset: 10, 2
+  index: -1
+player-cast-south-0
+  rotate: false
+  xy: 548, 409
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-cast-south-1
+  rotate: false
+  xy: 655, 410
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-cast-south-2
+  rotate: false
+  xy: 690, 410
+  size: 32, 49
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-cast-south-3
+  rotate: false
+  xy: 631, 461
+  size: 35, 49
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-cast-south-4
+  rotate: false
+  xy: 2, 461
+  size: 44, 49
+  orig: 64, 64
+  offset: 10, 2
+  index: -1
+player-cast-south-5
+  rotate: false
+  xy: 2, 410
+  size: 44, 49
+  orig: 64, 64
+  offset: 10, 2
+  index: -1
+player-cast-south-6
+  rotate: false
+  xy: 668, 461
+  size: 35, 49
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-cast-west-0
+  rotate: false
+  xy: 195, 258
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-slash-west-0
+  rotate: false
+  xy: 195, 258
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-0
+  rotate: false
+  xy: 195, 258
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-1
+  rotate: false
+  xy: 215, 208
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-2
+  rotate: false
+  xy: 221, 158
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-3
+  rotate: false
+  xy: 229, 108
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-4
+  rotate: false
+  xy: 931, 462
+  size: 35, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-5
+  rotate: false
+  xy: 968, 462
+  size: 35, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-cast-west-6
+  rotate: false
+  xy: 231, 58
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-hurt-south-0
+  rotate: false
+  xy: 829, 411
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 1
+  index: -1
+player-hurt-south-1
+  rotate: false
+  xy: 449, 360
+  size: 33, 48
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-hurt-south-2
+  rotate: false
+  xy: 194, 359
+  size: 32, 41
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-hurt-south-3
+  rotate: false
+  xy: 784, 321
+  size: 32, 37
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-hurt-south-4
+  rotate: false
+  xy: 75, 2
+  size: 35, 29
+  orig: 64, 64
+  offset: 20, 3
+  index: -1
+player-hurt-south-5
+  rotate: false
+  xy: 303, 368
+  size: 40, 39
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-shoot-east-0
+  rotate: false
+  xy: 48, 412
+  size: 44, 48
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-shoot-east-1
+  rotate: false
+  xy: 705, 462
+  size: 36, 48
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-shoot-east-10
+  rotate: false
+  xy: 36, 78
+  size: 34, 51
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-shoot-east-11
+  rotate: false
+  xy: 38, 25
+  size: 35, 51
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-shoot-east-12
+  rotate: false
+  xy: 34, 245
+  size: 34, 51
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-shoot-east-2
+  rotate: false
+  xy: 437, 462
+  size: 37, 48
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-shoot-east-3
+  rotate: false
+  xy: 345, 361
+  size: 35, 46
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-shoot-east-4
+  rotate: false
+  xy: 303, 409
+  size: 35, 50
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-shoot-east-5
+  rotate: false
+  xy: 2, 2
+  size: 34, 53
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-shoot-east-6
+  rotate: false
+  xy: 163, 455
+  size: 34, 55
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-shoot-east-7
+  rotate: false
+  xy: 199, 457
+  size: 36, 53
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-shoot-east-8
+  rotate: false
+  xy: 317, 461
+  size: 38, 49
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-shoot-east-9
+  rotate: false
+  xy: 31, 131
+  size: 35, 51
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-shoot-north-0
+  rotate: false
+  xy: 397, 462
+  size: 38, 48
+  orig: 64, 64
+  offset: 8, 2
+  index: -1
+player-shoot-north-1
+  rotate: false
+  xy: 512, 409
+  size: 34, 49
+  orig: 64, 64
+  offset: 11, 1
+  index: -1
+player-shoot-north-10
+  rotate: false
+  xy: 2, 176
+  size: 27, 60
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-12
+  rotate: false
+  xy: 2, 176
+  size: 27, 60
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-11
+  rotate: false
+  xy: 2, 114
+  size: 27, 60
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-2
+  rotate: false
+  xy: 476, 460
+  size: 37, 50
+  orig: 64, 64
+  offset: 14, 0
+  index: -1
+player-shoot-north-3
+  rotate: false
+  xy: 31, 184
+  size: 27, 52
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-4
+  rotate: false
+  xy: 2, 57
+  size: 32, 55
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-5
+  rotate: false
+  xy: 2, 238
+  size: 30, 58
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-6
+  rotate: false
+  xy: 94, 389
+  size: 31, 59
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-7
+  rotate: false
+  xy: 94, 450
+  size: 32, 60
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-8
+  rotate: false
+  xy: 128, 453
+  size: 33, 57
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-north-9
+  rotate: false
+  xy: 2, 298
+  size: 32, 60
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-shoot-south-0
+  rotate: false
+  xy: 593, 461
+  size: 36, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-shoot-south-1
+  rotate: false
+  xy: 515, 460
+  size: 37, 50
+  orig: 64, 64
+  offset: 12, 1
+  index: -1
+player-shoot-south-10
+  rotate: false
+  xy: 75, 33
+  size: 29, 51
+  orig: 64, 64
+  offset: 18, 0
+  index: -1
+player-shoot-south-12
+  rotate: false
+  xy: 75, 33
+  size: 29, 51
+  orig: 64, 64
+  offset: 18, 0
+  index: -1
+player-shoot-south-11
+  rotate: false
+  xy: 127, 397
+  size: 28, 51
+  orig: 64, 64
+  offset: 19, 0
+  index: -1
+player-shoot-south-2
+  rotate: false
+  xy: 743, 462
+  size: 36, 48
+  orig: 64, 64
+  offset: 13, 3
+  index: -1
+player-shoot-south-3
+  rotate: false
+  xy: 60, 192
+  size: 29, 51
+  orig: 64, 64
+  offset: 18, 0
+  index: -1
+player-shoot-south-4
+  rotate: false
+  xy: 68, 139
+  size: 28, 51
+  orig: 64, 64
+  offset: 19, 0
+  index: -1
+player-shoot-south-5
+  rotate: false
+  xy: 91, 200
+  size: 28, 49
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-shoot-south-6
+  rotate: false
+  xy: 98, 149
+  size: 28, 49
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-shoot-south-7
+  rotate: false
+  xy: 102, 98
+  size: 29, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-shoot-south-8
+  rotate: false
+  xy: 106, 47
+  size: 29, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-shoot-south-9
+  rotate: false
+  xy: 72, 86
+  size: 28, 51
+  orig: 64, 64
+  offset: 19, 0
+  index: -1
+player-shoot-west-0
+  rotate: false
+  xy: 48, 362
+  size: 44, 48
+  orig: 64, 64
+  offset: 7, 2
+  index: -1
+player-shoot-west-1
+  rotate: false
+  xy: 781, 462
+  size: 36, 48
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-10
+  rotate: false
+  xy: 194, 402
+  size: 34, 51
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-11
+  rotate: false
+  xy: 230, 404
+  size: 35, 51
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-12
+  rotate: false
+  xy: 267, 404
+  size: 34, 51
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-2
+  rotate: false
+  xy: 819, 462
+  size: 36, 48
+  orig: 64, 64
+  offset: 10, 2
+  index: -1
+player-shoot-west-3
+  rotate: false
+  xy: 484, 361
+  size: 35, 46
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-4
+  rotate: false
+  xy: 340, 409
+  size: 35, 50
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-5
+  rotate: false
+  xy: 72, 307
+  size: 34, 53
+  orig: 64, 64
+  offset: 11, 2
+  index: -1
+player-shoot-west-6
+  rotate: false
+  xy: 36, 303
+  size: 34, 55
+  orig: 64, 64
+  offset: 11, 2
+  index: -1
+player-shoot-west-7
+  rotate: false
+  xy: 237, 457
+  size: 36, 53
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-8
+  rotate: false
+  xy: 357, 461
+  size: 38, 49
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-shoot-west-9
+  rotate: false
+  xy: 157, 400
+  size: 35, 51
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-slash-east-1
+  rotate: false
+  xy: 492, 311
+  size: 31, 46
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-east-2
+  rotate: false
+  xy: 350, 160
+  size: 30, 47
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-slash-east-3
+  rotate: false
+  xy: 693, 360
+  size: 32, 48
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-east-4
+  rotate: false
+  xy: 521, 359
+  size: 33, 48
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-east-5
+  rotate: false
+  xy: 588, 360
+  size: 33, 48
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-north-1
+  rotate: false
+  xy: 234, 8
+  size: 28, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-slash-north-2
+  rotate: false
+  xy: 202, 309
+  size: 27, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-slash-north-3
+  rotate: false
+  xy: 121, 204
+  size: 29, 49
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-slash-north-4
+  rotate: false
+  xy: 554, 461
+  size: 37, 49
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-slash-north-5
+  rotate: false
+  xy: 275, 461
+  size: 40, 49
+  orig: 64, 64
+  offset: 16, 2
+  index: -1
+player-slash-south-0
+  rotate: false
+  xy: 583, 410
+  size: 34, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-slash-south-1
+  rotate: false
+  xy: 137, 2
+  size: 32, 47
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-south-2
+  rotate: false
+  xy: 727, 360
+  size: 32, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-slash-south-3
+  rotate: false
+  xy: 864, 411
+  size: 33, 49
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-slash-south-4
+  rotate: false
+  xy: 619, 410
+  size: 34, 49
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-slash-south-5
+  rotate: false
+  xy: 406, 411
+  size: 35, 49
+  orig: 64, 64
+  offset: 20, 2
+  index: -1
+player-slash-west-1
+  rotate: false
+  xy: 525, 311
+  size: 31, 46
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-slash-west-2
+  rotate: false
+  xy: 358, 111
+  size: 31, 47
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-slash-west-3
+  rotate: false
+  xy: 761, 360
+  size: 32, 48
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-slash-west-4
+  rotate: false
+  xy: 623, 360
+  size: 33, 48
+  orig: 64, 64
+  offset: 11, 2
+  index: -1
+player-slash-west-5
+  rotate: false
+  xy: 658, 360
+  size: 33, 48
+  orig: 64, 64
+  offset: 11, 2
+  index: -1
+player-thrust-east-0
+  rotate: false
+  xy: 227, 259
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-thrust-east-1
+  rotate: false
+  xy: 231, 309
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-thrust-east-2
+  rotate: false
+  xy: 247, 209
+  size: 31, 48
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-thrust-east-3
+  rotate: false
+  xy: 795, 360
+  size: 32, 48
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-thrust-east-4
+  rotate: false
+  xy: 253, 159
+  size: 30, 48
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-thrust-east-5
+  rotate: false
+  xy: 259, 259
+  size: 31, 48
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-thrust-east-6
+  rotate: false
+  xy: 263, 309
+  size: 30, 48
+  orig: 64, 64
+  offset: 21, 2
+  index: -1
+player-thrust-east-7
+  rotate: false
+  xy: 863, 361
+  size: 32, 48
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-thrust-north-0
+  rotate: false
+  xy: 261, 109
+  size: 30, 48
+  orig: 64, 64
+  offset: 16, 1
+  index: -1
+player-thrust-north-1
+  rotate: false
+  xy: 128, 153
+  size: 28, 49
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-2
+  rotate: false
+  xy: 377, 409
+  size: 27, 50
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-3
+  rotate: false
+  xy: 70, 251
+  size: 27, 50
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-4
+  rotate: false
+  xy: 133, 102
+  size: 28, 49
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-5
+  rotate: false
+  xy: 137, 51
+  size: 28, 49
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-6
+  rotate: false
+  xy: 108, 308
+  size: 28, 49
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-north-7
+  rotate: false
+  xy: 133, 257
+  size: 27, 49
+  orig: 64, 64
+  offset: 17, 0
+  index: -1
+player-thrust-south-0
+  rotate: false
+  xy: 899, 411
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-thrust-south-1
+  rotate: false
+  xy: 443, 411
+  size: 31, 49
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-thrust-south-2
+  rotate: false
+  xy: 263, 59
+  size: 30, 48
+  orig: 64, 64
+  offset: 20, 3
+  index: -1
+player-thrust-south-3
+  rotate: false
+  xy: 897, 361
+  size: 32, 48
+  orig: 64, 64
+  offset: 18, 3
+  index: -1
+player-thrust-south-4
+  rotate: false
+  xy: 361, 62
+  size: 30, 47
+  orig: 64, 64
+  offset: 20, 3
+  index: -1
+player-thrust-south-5
+  rotate: false
+  xy: 361, 13
+  size: 30, 47
+  orig: 64, 64
+  offset: 20, 3
+  index: -1
+player-thrust-south-6
+  rotate: false
+  xy: 394, 310
+  size: 30, 47
+  orig: 64, 64
+  offset: 20, 3
+  index: -1
+player-thrust-south-7
+  rotate: false
+  xy: 931, 361
+  size: 32, 48
+  orig: 64, 64
+  offset: 18, 3
+  index: -1
+player-thrust-west-0
+  rotate: false
+  xy: 264, 9
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-thrust-west-1
+  rotate: false
+  xy: 280, 209
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-thrust-west-2
+  rotate: false
+  xy: 285, 159
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-thrust-west-3
+  rotate: false
+  xy: 965, 361
+  size: 32, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-thrust-west-4
+  rotate: false
+  xy: 293, 109
+  size: 30, 48
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-thrust-west-5
+  rotate: false
+  xy: 295, 59
+  size: 31, 48
+  orig: 64, 64
+  offset: 12, 2
+  index: -1
+player-thrust-west-6
+  rotate: false
+  xy: 296, 9
+  size: 30, 48
+  orig: 64, 64
+  offset: 13, 2
+  index: -1
+player-thrust-west-7
+  rotate: false
+  xy: 292, 259
+  size: 32, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-east-1
+  rotate: false
+  xy: 460, 311
+  size: 30, 47
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-walk-east-2
+  rotate: false
+  xy: 558, 311
+  size: 30, 46
+  orig: 64, 64
+  offset: 19, 3
+  index: -1
+player-walk-east-3
+  rotate: false
+  xy: 656, 311
+  size: 30, 47
+  orig: 64, 64
+  offset: 19, 3
+  index: -1
+player-walk-east-4
+  rotate: false
+  xy: 295, 309
+  size: 31, 48
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-walk-east-5
+  rotate: false
+  xy: 360, 310
+  size: 32, 47
+  orig: 64, 64
+  offset: 17, 2
+  index: -1
+player-walk-east-6
+  rotate: false
+  xy: 590, 311
+  size: 31, 47
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-walk-east-7
+  rotate: false
+  xy: 312, 209
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-walk-east-8
+  rotate: false
+  xy: 318, 159
+  size: 30, 48
+  orig: 64, 64
+  offset: 19, 2
+  index: -1
+player-walk-north-0
+  rotate: false
+  xy: 325, 109
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-north-1
+  rotate: false
+  xy: 328, 59
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-north-2
+  rotate: false
+  xy: 138, 308
+  size: 30, 49
+  orig: 64, 64
+  offset: 15, 1
+  index: -1
+player-walk-north-3
+  rotate: false
+  xy: 152, 206
+  size: 29, 49
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-walk-north-4
+  rotate: false
+  xy: 162, 257
+  size: 31, 49
+  orig: 64, 64
+  offset: 15, 1
+  index: -1
+player-walk-north-5
+  rotate: false
+  xy: 328, 9
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-north-6
+  rotate: false
+  xy: 170, 308
+  size: 30, 49
+  orig: 64, 64
+  offset: 15, 1
+  index: -1
+player-walk-north-7
+  rotate: false
+  xy: 158, 155
+  size: 29, 49
+  orig: 64, 64
+  offset: 15, 0
+  index: -1
+player-walk-north-8
+  rotate: false
+  xy: 163, 104
+  size: 31, 49
+  orig: 64, 64
+  offset: 15, 1
+  index: -1
+player-walk-south-0
+  rotate: false
+  xy: 934, 411
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-walk-south-1
+  rotate: false
+  xy: 969, 411
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-walk-south-2
+  rotate: false
+  xy: 99, 255
+  size: 32, 50
+  orig: 64, 64
+  offset: 19, 1
+  index: -1
+player-walk-south-3
+  rotate: false
+  xy: 167, 53
+  size: 31, 49
+  orig: 64, 64
+  offset: 20, 1
+  index: -1
+player-walk-south-4
+  rotate: false
+  xy: 724, 410
+  size: 33, 50
+  orig: 64, 64
+  offset: 18, 1
+  index: -1
+player-walk-south-5
+  rotate: false
+  xy: 414, 360
+  size: 33, 49
+  orig: 64, 64
+  offset: 18, 2
+  index: -1
+player-walk-south-6
+  rotate: false
+  xy: 759, 410
+  size: 33, 50
+  orig: 64, 64
+  offset: 18, 1
+  index: -1
+player-walk-south-7
+  rotate: false
+  xy: 829, 360
+  size: 32, 49
+  orig: 64, 64
+  offset: 19, 1
+  index: -1
+player-walk-south-8
+  rotate: false
+  xy: 794, 410
+  size: 33, 50
+  orig: 64, 64
+  offset: 18, 1
+  index: -1
+player-walk-west-1
+  rotate: false
+  xy: 688, 311
+  size: 30, 47
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-2
+  rotate: false
+  xy: 752, 312
+  size: 30, 46
+  orig: 64, 64
+  offset: 15, 3
+  index: -1
+player-walk-west-3
+  rotate: false
+  xy: 720, 311
+  size: 30, 47
+  orig: 64, 64
+  offset: 15, 3
+  index: -1
+player-walk-west-4
+  rotate: false
+  xy: 326, 259
+  size: 31, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-5
+  rotate: false
+  xy: 426, 311
+  size: 32, 47
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-6
+  rotate: false
+  xy: 623, 311
+  size: 31, 47
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-7
+  rotate: false
+  xy: 328, 309
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1
+player-walk-west-8
+  rotate: false
+  xy: 344, 209
+  size: 30, 48
+  orig: 64, 64
+  offset: 15, 2
+  index: -1

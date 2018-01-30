@@ -17,17 +17,20 @@ class MovementSystem : IteratingSystem(allOf(Transform::class, Movement::class).
         val transform = transform.get(entity)
         val movement = movement.get(entity)
 
+        movement.velocityX = 0f
+        movement.velocityY = 0f
+
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            transform.x += 1.0f * deltaTime
+            movement.velocityX = 1.0f
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            transform.x -= 1.0f * deltaTime
+            movement.velocityX = -1.0f
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            transform.y -= 1.0f * deltaTime
+            movement.velocityY = -1.0f
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            transform.y += 1.0f * deltaTime
+            movement.velocityY = 1.0f
 
         transform.x += movement.velocityX * deltaTime
         transform.y += movement.velocityY * deltaTime
