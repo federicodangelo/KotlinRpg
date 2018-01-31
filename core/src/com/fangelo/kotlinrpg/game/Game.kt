@@ -3,7 +3,6 @@ package com.fangelo.kotlinrpg.game
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
@@ -11,29 +10,54 @@ import com.fangelo.kotlinrpg.game.components.*
 import com.fangelo.kotlinrpg.game.systems.*
 import ktx.assets.toInternalFile
 import ktx.collections.toGdxArray
+import java.util.*
 
 class Game {
 
-    val CAMERA_SCALE = 16
+    val CAMERA_SCALE = 8
 
-    val engine = PooledEngine()
-    val camera = OrthographicCamera(640f, 480f)
-    val renderSystem: RenderSystem
-    var player: Entity? = null
+    private val engine = PooledEngine()
+    private val camera: Camera
+    private var player: Entity? = null
 
     init {
 
-        renderSystem = RenderSystem()
+        camera = Camera()
+        camera.moveTo(16.5f, 16.5f)
 
         engine.addSystem(MainAvatarInputSystem())
         engine.addSystem(MovementSystem())
         engine.addSystem(AvatarAnimationSystem())
         engine.addSystem(UpdateVisualAnimationSystem())
-        engine.addSystem(renderSystem)
+        engine.addSystem(VisualTilemapRenderSystem())
+        engine.addSystem(VisualTextureRenderSystem())
 
         resize(Gdx.graphics.width, Gdx.graphics.height)
 
+        addCamera()
+        addTilemap()
         addPlayer()
+    }
+
+    private fun addTilemap() {
+        val tilemapAtlas = TextureAtlas("tiles/tiles.atlas".toInternalFile(), true)
+
+        val tilemapEntity = engine.createEntity()
+
+        val rnd = Random()
+
+        tilemapEntity.add(Transform(0f, 0f))
+        tilemapEntity.add(Tilemap(32, 32, Array(32 * 32, { rnd.nextInt(4) })))
+        tilemapEntity.add(VisualTilemap(arrayOf(tilemapAtlas.findRegion("grass-center-0"), tilemapAtlas.findRegion("grass-center-1"),
+                tilemapAtlas.findRegion("grass-center-2"), tilemapAtlas.findRegion("grass-center-3"))))
+
+        engine.addEntity(tilemapEntity)
+    }
+
+    private fun addCamera() {
+        val mainCameraEntity = engine.createEntity()
+        mainCameraEntity.add(camera)
+        engine.addEntity(mainCameraEntity)
     }
 
     private fun addPlayer() {
@@ -42,11 +66,10 @@ class Game {
         val playerRegion = playersAtlas.findRegion("player-walk-south-0")
         val playerAnimations = buildAnimations("player", playersAtlas)
 
-
         val player = engine.createEntity()
-        player.add(Transform(0f, 0f))
+        player.add(Transform(16.5f, 16.5f))
         player.add(Movement(0f, 0f))
-        player.add(Visual(playerRegion))
+        player.add(VisualTexture(playerRegion, 2f, 2f))
         player.add(VisualAnimation(playerAnimations, "walk-east"))
         player.add(MainAvatar())
         engine.addEntity(player)
@@ -85,7 +108,7 @@ class Game {
     }
 
     fun resize(width: Int, height: Int) {
-        renderSystem.resize(width / CAMERA_SCALE, height / CAMERA_SCALE)
+        camera.resize(width / CAMERA_SCALE, height / CAMERA_SCALE)
     }
 
 }
