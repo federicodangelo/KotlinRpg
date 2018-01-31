@@ -1,4 +1,4 @@
-package com.fangelo.rawassets;
+package com.fangelo.rawassets.tasks.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
