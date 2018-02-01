@@ -24,9 +24,9 @@ allprojects {
         gdxVersion = '1.9.8'
         roboVMVersion = '2.3.1'
         box2DLightsVersion = '1.4'
-        ashleyVersion = '1.7.0'
-        aiVersion = '1.8.0'
-        ktxVersion = '1.9.7-b1'
+        ashleyVersion = '1.7.3'
+        aiVersion = '1.8.1'
+        ktxVersion = '1.9.8-b1'
     }
 
     repositories {

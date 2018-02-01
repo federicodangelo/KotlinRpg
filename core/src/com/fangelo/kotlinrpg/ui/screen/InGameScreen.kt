@@ -4,7 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup
 import com.fangelo.kotlinrpg.Globals
-import com.fangelo.kotlinrpg.game.Game
 import com.fangelo.libraries.ui.Screen
 import com.fangelo.libraries.ui.ScreenManager
 import ktx.actors.onChange
@@ -63,7 +62,6 @@ class InGameScreen : Screen() {
     }
 
 
-
     private fun addExitButton() {
         val exitButton = TextButton("Exit", skin)
 
@@ -75,6 +73,9 @@ class InGameScreen : Screen() {
     }
 
     private fun returnToMainScreen() {
+        Globals.activeGame?.dispose()
+        Globals.activeGame = null
+
         ScreenManager.show(MainMenuScreen())
     }
 }

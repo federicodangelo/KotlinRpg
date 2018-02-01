@@ -2,10 +2,9 @@ package com.fangelo.kotlinrpg.game.systems
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
-import com.fangelo.kotlinrpg.game.components.Avatar
-import com.fangelo.kotlinrpg.game.components.MainAvatar
-import com.fangelo.kotlinrpg.game.components.Movement
-import com.fangelo.kotlinrpg.game.components.VisualAnimation
+import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
+import com.fangelo.libraries.ashley.components.Movement
+import com.fangelo.libraries.ashley.components.VisualAnimation
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
@@ -24,7 +23,5 @@ class AvatarAnimationSystem : IteratingSystem(allOf(Movement::class, MainAvatar:
             movement.velocityY > 0 -> visualAnimation.playAnimation("walk-south")
             else -> visualAnimation.stop()
         }
-
-
     }
 }

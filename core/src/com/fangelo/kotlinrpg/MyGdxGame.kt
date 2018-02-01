@@ -8,6 +8,8 @@ import com.fangelo.libraries.ui.DialogResult
 import com.fangelo.libraries.ui.ScreenManager
 import ktx.app.KtxApplicationAdapter
 
+private const val REF_HEIGHT_IN_PIXELS = 1366
+
 class MyGdxGame : KtxApplicationAdapter {
 
     override fun create() {
@@ -51,7 +53,11 @@ class MyGdxGame : KtxApplicationAdapter {
     }
 
     override fun resize(width: Int, height: Int) {
-        ScreenManager.resize(width, height)
+
+        val screenScale = REF_HEIGHT_IN_PIXELS.toFloat() / height.toFloat()
+
+        ScreenManager.resize(width, height, screenScale)
+
         Globals.activeGame?.resize(width, height)
     }
 

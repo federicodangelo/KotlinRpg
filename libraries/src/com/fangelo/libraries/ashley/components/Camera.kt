@@ -1,4 +1,4 @@
-package com.fangelo.kotlinrpg.game.components
+package com.fangelo.libraries.ashley.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -6,23 +6,11 @@ import com.badlogic.gdx.math.Matrix4
 
 class Camera : Component {
 
+    var followTransform: Transform? = null
+
     private var cameraChanged: Boolean = true
 
     private var camera = OrthographicCamera()
-
-    var x: Float = 0f
-        set(value) {
-            field = value
-            camera.position.x = value
-            cameraChanged = true
-        }
-
-    var y: Float = 0f
-        set(value) {
-            field = value
-            camera.position.y = value
-            cameraChanged = true
-        }
 
     var zoom: Float
         get() = camera.zoom
@@ -34,15 +22,20 @@ class Camera : Component {
     init {
         camera = OrthographicCamera()
         camera.setToOrtho(true)
-        camera.zoom = 0.25f
+        camera.zoom = 1f
         camera.position.set(0f, 0f, 0f)
     }
 
-    fun moveTo(x: Float, y: Float) {
-        this.x = x
-        this.y = y
+    internal fun update(x: Float, y: Float) {
+        if (x != camera.position.x) {
+            camera.position.x = x
+            cameraChanged = true
+        }
+        if (y != camera.position.y) {
+            camera.position.y = y
+            cameraChanged = true
+        }
     }
-
 
     fun resize(width: Int, height: Int) {
         camera.viewportWidth = width.toFloat()

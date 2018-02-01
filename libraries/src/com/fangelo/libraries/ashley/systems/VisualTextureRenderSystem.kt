@@ -1,4 +1,4 @@
-package com.fangelo.kotlinrpg.game.systems
+package com.fangelo.libraries.ashley.systems
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
@@ -6,9 +6,9 @@ import com.badlogic.ashley.core.EntitySystem
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
-import com.fangelo.kotlinrpg.game.components.Camera
-import com.fangelo.kotlinrpg.game.components.Transform
-import com.fangelo.kotlinrpg.game.components.VisualTexture
+import com.fangelo.libraries.ashley.components.Camera
+import com.fangelo.libraries.ashley.components.Transform
+import com.fangelo.libraries.ashley.components.VisualTexture
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
@@ -31,10 +31,8 @@ class VisualTextureRenderSystem : EntitySystem() {
         cameras = engine.getEntitiesFor(allOf(Camera::class).get())
     }
 
-
     override fun removedFromEngine(engine: Engine) {
     }
-
 
     override fun update(deltaTime: Float) {
 
@@ -59,7 +57,7 @@ class VisualTextureRenderSystem : EntitySystem() {
 
             transform = this.transform.get(e)
             visualTexture = this.visual.get(e)
-            val texture = visualTexture.texture;
+            val texture = visualTexture.texture
 
             var targetX = transform.x - visualTexture.width * 0.5f
             var targetY = transform.y - visualTexture.height * 0.5f

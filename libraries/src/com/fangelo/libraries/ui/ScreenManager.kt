@@ -53,7 +53,7 @@ object ScreenManager {
 
     init {
 
-        textureAtlas = TextureAtlas(file("ui/ui.atlas"));
+        textureAtlas = TextureAtlas(file("ui/ui.atlas"))
         skin = Skin(file("ui/ui.json"), textureAtlas)
         stageViewport = ScalingViewport(Scaling.stretch, (Gdx.graphics.width / 2).toFloat(), (Gdx.graphics.height / 2).toFloat())
         spriteBatch = SpriteBatch()
@@ -96,8 +96,8 @@ object ScreenManager {
         skin.dispose()
     }
 
-    fun resize(width: Int, height: Int) {
-        stageViewport.setWorldSize((width / 2).toFloat(), (height / 2).toFloat())
+    fun resize(width: Int, height: Int, screenScale: Float) {
+        stageViewport.setWorldSize((width / 2).toFloat() * screenScale, (height / 2).toFloat() * screenScale)
         stageViewport.update(width, height, true)
 
         activeScreen?.internalResize(width, height)
@@ -118,8 +118,6 @@ object ScreenManager {
             stageDebug.act(Gdx.graphics.deltaTime)
             stageDebug.draw()
         }
-
-        //stageTable.drawDebug(shapeRenderer); // This is optional, but enables debug lines for tables.
     }
 
     private fun updateDebug(delta: Float) {

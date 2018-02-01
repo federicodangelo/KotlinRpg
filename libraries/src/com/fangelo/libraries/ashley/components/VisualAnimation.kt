@@ -1,4 +1,4 @@
-package com.fangelo.kotlinrpg.game.components
+package com.fangelo.libraries.ashley.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.g2d.Animation

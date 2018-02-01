@@ -42,11 +42,11 @@ public class BuildTilesAtlas extends AssetBuilderTask {
 
 		settings.fast = true;
 		settings.grid = true;
-		settings.paddingX = 0;
-		settings.paddingY = 0;
+		settings.paddingX = 2;
+		settings.paddingY = 2;
 		settings.useIndexes = false;
 		settings.maxWidth = settings.maxHeight = 2048;
-		settings.duplicatePadding = false;
+		settings.duplicatePadding = true;
 		//settings.filterMag = Texture.TextureFilter.Linear;
 		//settings.filterMin = Texture.TextureFilter.Linear;
 

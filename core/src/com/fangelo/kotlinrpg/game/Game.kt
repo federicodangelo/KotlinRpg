@@ -3,27 +3,39 @@ package com.fangelo.kotlinrpg.game
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.assets.loaders.TextureAtlasLoader
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
-import com.fangelo.kotlinrpg.game.components.*
-import com.fangelo.kotlinrpg.game.systems.*
-import ktx.assets.toInternalFile
+import com.fangelo.kotlinrpg.game.components.avatar.Avatar
+import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
+import com.fangelo.kotlinrpg.game.systems.AvatarAnimationSystem
+import com.fangelo.kotlinrpg.game.systems.MainAvatarInputSystem
+import com.fangelo.libraries.ashley.components.*
+import com.fangelo.libraries.ashley.systems.*
+import ktx.ashley.entity
+import ktx.ashley.get
+import ktx.assets.load
 import ktx.collections.toGdxArray
 import java.util.*
 
-class Game {
+private const val REF_HEIGHT_IN_TILES = 32
 
-    val CAMERA_SCALE = 8
+class Game {
 
     private val engine = PooledEngine()
     private val camera: Camera
     private var player: Entity? = null
+    private val assetManager = AssetManager()
 
     init {
 
+        loadAssets()
+
         camera = addCamera()
 
+        engine.addSystem(UpdateCameraSystem())
         engine.addSystem(MainAvatarInputSystem())
         engine.addSystem(MovementSystem())
         engine.addSystem(AvatarAnimationSystem())
@@ -35,51 +47,76 @@ class Game {
 
         addTilemap()
         addPlayer()
+
+        camera.followTransform = player?.get()
+    }
+
+    private fun loadAssets() {
+        assetManager.load<TextureAtlas>("tiles/tiles.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
+        assetManager.load<TextureAtlas>("players/players.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
+        assetManager.finishLoading()
     }
 
     private fun addTilemap() {
-        val tilemapAtlas = TextureAtlas("tiles/tiles.atlas".toInternalFile(), true)
-
-        val tilemapEntity = engine.createEntity()
-
+        val tilesetAtlas = assetManager.get<TextureAtlas>("tiles/tiles.atlas")
         val rnd = Random()
+        val tileset = buildTileset(tilesetAtlas)
+        val sizeX = 32
+        val sizeY = 32
+        val tiles = Array(sizeX * sizeY, { rnd.nextInt(tileset.size) })
 
-        tilemapEntity.add(engine.createComponent(Transform::class.java))
-        tilemapEntity.add(engine.createComponent(Tilemap::class.java).set(32, 32, Array(32 * 32, { rnd.nextInt(4) })))
-        tilemapEntity.add(engine.createComponent(VisualTilemap::class.java).set(arrayOf(
-                tilemapAtlas.findRegion("grass-center-0"), tilemapAtlas.findRegion("grass-center-1"),
-                tilemapAtlas.findRegion("grass-center-2"), tilemapAtlas.findRegion("grass-center-3"))))
+        engine.entity {
+            with<Transform>()
+            with<Tilemap> {
+                set(sizeX, sizeY, tiles)
+            }
+            with<VisualTileset> {
+                set(tileset)
+            }
+        }
+    }
 
-        engine.addEntity(tilemapEntity)
+    private fun buildTileset(tilesetAtlas: TextureAtlas): Array<TextureRegion> {
+        return arrayOf(
+                tilesetAtlas.findRegion("grass-center-0"), tilesetAtlas.findRegion("grass-center-1"),
+                tilesetAtlas.findRegion("grass-center-2"), tilesetAtlas.findRegion("grass-center-3"))
     }
 
     private fun addCamera(): Camera {
-        val mainCameraEntity = engine.createEntity()
-        val camera = engine.createComponent(Camera::class.java)
-        mainCameraEntity.add(camera)
-        camera.moveTo(16.5f, 16.5f)
-        engine.addEntity(mainCameraEntity)
-        return camera
+
+        val cameraEntity = engine.entity {
+            with<Transform> {
+                set(16.5f, 16.5f)
+            }
+            with<Camera>()
+        }
+
+        return cameraEntity.get()!!
     }
 
     private fun addPlayer() {
 
-        val playersAtlas = TextureAtlas("players/players.atlas".toInternalFile(), true)
+        val playersAtlas = assetManager.get<TextureAtlas>("players/players.atlas")
         val playerRegion = playersAtlas.findRegion("player-walk-south-0")
-        val playerAnimations = buildAnimations("player", playersAtlas)
+        val playerAnimations = buildPlayerAnimations("player", playersAtlas)
 
-        val player = engine.createEntity()
-        player.add(engine.createComponent(Transform::class.java).set(16.5f, 16.5f))
-        player.add(engine.createComponent(Movement::class.java))
-        player.add(engine.createComponent(VisualTexture::class.java).set(playerRegion, 2f, 2f))
-        player.add(engine.createComponent(VisualAnimation::class.java).set(playerAnimations, "walk-east"))
-        player.add(engine.createComponent(MainAvatar::class.java))
-        engine.addEntity(player)
-
-        this.player = player
+        this.player = engine.entity {
+            with<Transform> {
+                set(16.5f, 16.5f)
+            }
+            with<Movement>()
+            with<VisualTexture> {
+                set(playerRegion, 2f, 2f)
+            }
+            with<VisualAnimation> {
+                set(playerAnimations, "walk-east")
+            }
+            with<Avatar>()
+            with<MainAvatar>()
+        }
     }
 
-    private fun buildAnimations(playerName: String, playersAtlas: TextureAtlas): Map<String, Animation<TextureRegion>> {
+    private fun buildPlayerAnimations(playerName: String, playersAtlas: TextureAtlas): Map<String, Animation<TextureRegion>> {
         val animations = mutableMapOf<String, Animation<TextureRegion>>()
 
         addAnimations(animations, playersAtlas, playerName, "walk-north", 9, Animation.PlayMode.LOOP)
@@ -110,7 +147,13 @@ class Game {
     }
 
     fun resize(width: Int, height: Int) {
-        camera.resize(width / CAMERA_SCALE, height / CAMERA_SCALE)
+
+        val scale = REF_HEIGHT_IN_TILES.toFloat() / height.toFloat()
+
+        camera.resize((width.toFloat() * scale).toInt(), (height.toFloat() * scale).toInt())
     }
 
+    fun dispose() {
+        assetManager.dispose()
+    }
 }

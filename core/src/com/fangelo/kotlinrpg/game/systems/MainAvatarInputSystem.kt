@@ -4,30 +4,39 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.fangelo.kotlinrpg.game.components.MainAvatar
-import com.fangelo.kotlinrpg.game.components.Movement
+import com.fangelo.kotlinrpg.game.components.avatar.Avatar
+import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
+import com.fangelo.libraries.ashley.components.Movement
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
+import ktx.math.vec2
 
-class MainAvatarInputSystem : IteratingSystem(allOf(Movement::class, MainAvatar::class).get()) {
+class MainAvatarInputSystem : IteratingSystem(allOf(Movement::class, Avatar::class, MainAvatar::class).get()) {
     private val movement = mapperFor<Movement>()
+    private val avatar = mapperFor<Avatar>()
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val movement = movement.get(entity)
+        val avatar = avatar.get(entity)
 
-        movement.velocityX = 0f
-        movement.velocityY = 0f
+        val velocity = vec2()
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            movement.velocityX += 1.0f
+            velocity.x += avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            movement.velocityX += -1.0f
+            velocity.x += -avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            movement.velocityY += -1.0f
+            velocity.y += -avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            movement.velocityY += 1.0f
+            velocity.y += avatar.walkSpeed
+
+        if (!velocity.isZero)
+            velocity.nor().scl(avatar.walkSpeed)
+
+        movement.velocityX = velocity.x
+        movement.velocityY = velocity.y
     }
 }
