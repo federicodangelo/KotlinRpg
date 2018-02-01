@@ -3,10 +3,12 @@ package com.fangelo.kotlinrpg.game.components
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-class VisualTexture(var texture: TextureRegion, var width: Float = 1f, var height: Float = 1f) : Component {
+class VisualTexture(var texture: TextureRegion = TextureRegion(), var width: Float = 1f, var height: Float = 1f) : Component {
 
-    init {
-
+    fun set(texture: TextureRegion, width: Float, height: Float): VisualTexture {
+        this.texture = texture
+        this.width = width
+        this.height = height
+        return this
     }
-
 }

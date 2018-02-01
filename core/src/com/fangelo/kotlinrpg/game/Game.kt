@@ -22,8 +22,7 @@ class Game {
 
     init {
 
-        camera = Camera()
-        camera.moveTo(16.5f, 16.5f)
+        camera = addCamera()
 
         engine.addSystem(MainAvatarInputSystem())
         engine.addSystem(MovementSystem())
@@ -34,7 +33,6 @@ class Game {
 
         resize(Gdx.graphics.width, Gdx.graphics.height)
 
-        addCamera()
         addTilemap()
         addPlayer()
     }
@@ -46,18 +44,22 @@ class Game {
 
         val rnd = Random()
 
-        tilemapEntity.add(Transform(0f, 0f))
-        tilemapEntity.add(Tilemap(32, 32, Array(32 * 32, { rnd.nextInt(4) })))
-        tilemapEntity.add(VisualTilemap(arrayOf(tilemapAtlas.findRegion("grass-center-0"), tilemapAtlas.findRegion("grass-center-1"),
+        tilemapEntity.add(engine.createComponent(Transform::class.java))
+        tilemapEntity.add(engine.createComponent(Tilemap::class.java).set(32, 32, Array(32 * 32, { rnd.nextInt(4) })))
+        tilemapEntity.add(engine.createComponent(VisualTilemap::class.java).set(arrayOf(
+                tilemapAtlas.findRegion("grass-center-0"), tilemapAtlas.findRegion("grass-center-1"),
                 tilemapAtlas.findRegion("grass-center-2"), tilemapAtlas.findRegion("grass-center-3"))))
 
         engine.addEntity(tilemapEntity)
     }
 
-    private fun addCamera() {
+    private fun addCamera(): Camera {
         val mainCameraEntity = engine.createEntity()
+        val camera = engine.createComponent(Camera::class.java)
         mainCameraEntity.add(camera)
+        camera.moveTo(16.5f, 16.5f)
         engine.addEntity(mainCameraEntity)
+        return camera
     }
 
     private fun addPlayer() {
@@ -67,18 +69,18 @@ class Game {
         val playerAnimations = buildAnimations("player", playersAtlas)
 
         val player = engine.createEntity()
-        player.add(Transform(16.5f, 16.5f))
-        player.add(Movement(0f, 0f))
-        player.add(VisualTexture(playerRegion, 2f, 2f))
-        player.add(VisualAnimation(playerAnimations, "walk-east"))
-        player.add(MainAvatar())
+        player.add(engine.createComponent(Transform::class.java).set(16.5f, 16.5f))
+        player.add(engine.createComponent(Movement::class.java))
+        player.add(engine.createComponent(VisualTexture::class.java).set(playerRegion, 2f, 2f))
+        player.add(engine.createComponent(VisualAnimation::class.java).set(playerAnimations, "walk-east"))
+        player.add(engine.createComponent(MainAvatar::class.java))
         engine.addEntity(player)
 
         this.player = player
     }
 
     private fun buildAnimations(playerName: String, playersAtlas: TextureAtlas): Map<String, Animation<TextureRegion>> {
-        val animations = mutableMapOf<String, Animation<TextureRegion>>();
+        val animations = mutableMapOf<String, Animation<TextureRegion>>()
 
         addAnimations(animations, playersAtlas, playerName, "walk-north", 9, Animation.PlayMode.LOOP)
         addAnimations(animations, playersAtlas, playerName, "walk-west", 9, Animation.PlayMode.LOOP)

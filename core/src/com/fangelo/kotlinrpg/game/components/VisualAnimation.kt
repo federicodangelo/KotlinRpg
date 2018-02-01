@@ -4,18 +4,23 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-class VisualAnimation(val animations: Map<String, Animation<TextureRegion>>, startingAnimation: String) : Component {
+class VisualAnimation(var animations: Map<String, Animation<TextureRegion>> = mapOf(), startingAnimation: String = "") : Component {
 
     var activeAnimation: Animation<TextureRegion>
+        private set
+
     var animationTime: Float
     var playing: Boolean = true
+
     val isFinished
         get() = activeAnimation.isAnimationFinished(animationTime)
 
     init {
-        activeAnimation = animations[startingAnimation]!!
+        activeAnimation = if (startingAnimation != "") animations[startingAnimation]!! else emptyAnimation()
         animationTime = 0f
     }
+
+    private fun emptyAnimation() = Animation(0f, TextureRegion())
 
     fun playAnimation(name: String) {
 
@@ -37,5 +42,11 @@ class VisualAnimation(val animations: Map<String, Animation<TextureRegion>>, sta
     fun stop() {
         animationTime = 0f
         playing = false
+    }
+
+    fun set(animations: Map<String, Animation<TextureRegion>>, startingAnimation: String): VisualAnimation {
+        this.animations = animations
+        this.activeAnimation = if (startingAnimation != "") animations[startingAnimation]!! else emptyAnimation()
+        return this
     }
 }
