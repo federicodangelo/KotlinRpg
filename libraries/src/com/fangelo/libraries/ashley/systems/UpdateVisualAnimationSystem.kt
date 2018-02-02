@@ -17,6 +17,6 @@ class UpdateVisualAnimationSystem : IteratingSystem(allOf(VisualTexture::class, 
 
         if (animation.playing)
             animation.animationTime += deltaTime
-        visual.texture = animation.activeAnimation.getKeyFrame(animation.animationTime)
+        visual.mainItem.texture = animation.activeAnimation.getKeyFrame(animation.animationTime)
     }
 }

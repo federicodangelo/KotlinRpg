@@ -6,13 +6,13 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.fangelo.kotlinrpg.game.components.avatar.Avatar
 import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
-import com.fangelo.libraries.ashley.components.Movement
+import com.fangelo.libraries.ashley.components.Rigidbody
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 import ktx.math.vec2
 
-class MainAvatarInputSystem : IteratingSystem(allOf(Movement::class, Avatar::class, MainAvatar::class).get()) {
-    private val movement = mapperFor<Movement>()
+class ProcessAvatarInputSystem : IteratingSystem(allOf(Rigidbody::class, Avatar::class, MainAvatar::class).get()) {
+    private val movement = mapperFor<Rigidbody>()
     private val avatar = mapperFor<Avatar>()
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {

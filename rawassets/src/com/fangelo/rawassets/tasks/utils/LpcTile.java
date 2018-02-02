@@ -6,22 +6,34 @@ import com.badlogic.gdx.graphics.PixmapIO;
 
 public class LpcTile {
 
-	static public int TILE_SIZE = 32;
+	private static int TILE_SIZE = 32;
 
-	public String name;
-	public int tileX;
-	public int tileY;
-	public Pixmap image;
+	private String name;
+	private Pixmap image;
 
-	public LpcTile(String name, int tileX, int tileY) {
+	private int fromX;
+	private int fromY;
+	private int width;
+	private int height;
+
+	LpcTile(String name, int tileX, int tileY) {
 		this.name = name;
-		this.tileX = tileX;
-		this.tileY = tileY;
+		this.fromX = tileX * TILE_SIZE;
+		this.fromY = tileY * TILE_SIZE;
+		this.width = this.height = TILE_SIZE;
+	}
+
+	public LpcTile(String name, int fromX, int fromY, int width, int height) {
+		this.name = name;
+		this.fromX = fromX;
+		this.fromY = fromY;
+		this.width = width;
+		this.height = height;
 	}
 
 	public void extractFrom(Pixmap bigImage, int offsetX, int offsetY) {
-		image = new Pixmap(TILE_SIZE, TILE_SIZE, bigImage.getFormat());
-		image.drawPixmap(bigImage, 0, 0, (offsetX + tileX) * TILE_SIZE, (offsetY + tileY) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+		image = new Pixmap(width, height, bigImage.getFormat());
+		image.drawPixmap(bigImage, 0, 0, fromX + offsetX, fromY + offsetY, width, height);
 	}
 
 	public void export(String targetFolder, String targetFileNamePrefix) {
@@ -30,6 +42,10 @@ public class LpcTile {
 	}
 
 	private String getFileName(String targetFolder, String targetFileNamePrefix) {
-		return targetFolder + targetFileNamePrefix + "-" + name + ".png";
+		if (targetFileNamePrefix.length() > 0) {
+			return targetFolder + targetFileNamePrefix + "-" + name + ".png";
+		} else {
+			return targetFolder + name + ".png";
+		}
 	}
 }

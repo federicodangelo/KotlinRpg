@@ -22,8 +22,8 @@ public class BuildTilesAtlas extends AssetBuilderTask {
 		Gdx.files.local("tiles").emptyDirectory();
 
 		unpackTerrain("lpc/tiles/TerrainAndOutside.png", "dirt", 0, 0);
-		unpackTerrain("lpc/tiles/TerrainAndOutside.png", "grass", 0, 6);
-		unpackTerrain("lpc/tiles/TerrainAndOutside.png", "water", 27, 0);
+		unpackTerrain("lpc/tiles/TerrainAndOutside.png", "grass", 0, 6 * 32);
+		unpackTerrain("lpc/tiles/TerrainAndOutside.png", "water", 27 * 32, 0);
 	}
 
 	private void unpackTerrain(String fileName, String terrainName, int offsetX, int offsetY) {

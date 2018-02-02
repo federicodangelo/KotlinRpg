@@ -15,6 +15,7 @@ import ktx.ashley.mapperFor
 class VisualTextureRenderSystem : EntitySystem() {
     private lateinit var entities: ImmutableArray<Entity>
     private lateinit var cameras: ImmutableArray<Entity>
+    private var sortedEntities = mutableListOf<Entity>()
 
     private val transform = mapperFor<Transform>()
     private val visual = mapperFor<VisualTexture>()
@@ -36,6 +37,8 @@ class VisualTextureRenderSystem : EntitySystem() {
 
     override fun update(deltaTime: Float) {
 
+        sortEntities()
+
         var camera: Camera
 
         for (c in cameras) {
@@ -49,32 +52,45 @@ class VisualTextureRenderSystem : EntitySystem() {
         }
     }
 
+    private fun sortEntities() {
+
+        sortedEntities.clear()
+        sortedEntities.addAll(entities)
+        sortedEntities.sortBy { transform.get(it).y }
+
+
+    }
+
     private fun drawEntities() {
         var transform: Transform
         var visualTexture: VisualTexture
 
-        for (e in entities) {
+        for (e in sortedEntities) {
 
             transform = this.transform.get(e)
             visualTexture = this.visual.get(e)
-            val texture = visualTexture.texture
 
-            var targetX = transform.x - visualTexture.width * 0.5f
-            var targetY = transform.y - visualTexture.height * 0.5f
-            var width = visualTexture.width
-            var height = visualTexture.height
+            for (item in visualTexture.items) {
 
-            if (texture is TextureAtlas.AtlasRegion) {
+                val texture = item.texture
 
-                width *= texture.packedWidth.toFloat() / texture.originalWidth.toFloat()
-                height *= texture.packedHeight.toFloat() / texture.originalHeight.toFloat()
+                var targetX = transform.x - item.width * 0.5f + item.offsetX
+                var targetY = transform.y - item.height * 0.5f + item.offsetY
+                var width = item.width
+                var height = item.height
 
-                targetX += texture.offsetX / texture.originalWidth.toFloat()
-                targetY += texture.offsetY / texture.originalHeight.toFloat()
+                if (texture is TextureAtlas.AtlasRegion) {
 
+                    width *= texture.packedWidth.toFloat() / texture.originalWidth.toFloat()
+                    height *= texture.packedHeight.toFloat() / texture.originalHeight.toFloat()
+
+                    targetX += texture.offsetX / texture.originalWidth.toFloat()
+                    targetY += texture.offsetY / texture.originalHeight.toFloat()
+
+                }
+
+                batch.draw(texture, targetX, targetY, width, height)
             }
-
-            batch.draw(texture, targetX, targetY, width, height)
         }
     }
 

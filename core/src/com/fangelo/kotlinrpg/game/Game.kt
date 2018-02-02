@@ -8,10 +8,11 @@ import com.badlogic.gdx.assets.loaders.TextureAtlasLoader
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.math.Vector2
 import com.fangelo.kotlinrpg.game.components.avatar.Avatar
 import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
-import com.fangelo.kotlinrpg.game.systems.AvatarAnimationSystem
-import com.fangelo.kotlinrpg.game.systems.MainAvatarInputSystem
+import com.fangelo.kotlinrpg.game.systems.ProcessAvatarInputSystem
+import com.fangelo.kotlinrpg.game.systems.UpdateAvatarAnimationSystem
 import com.fangelo.libraries.ashley.components.*
 import com.fangelo.libraries.ashley.systems.*
 import ktx.ashley.entity
@@ -38,10 +39,10 @@ class Game {
 
         camera = addCamera()
 
+        engine.addSystem(UpdatePhysicsSystem())
         engine.addSystem(UpdateCameraSystem())
-        engine.addSystem(MainAvatarInputSystem())
-        engine.addSystem(MovementSystem())
-        engine.addSystem(AvatarAnimationSystem())
+        engine.addSystem(ProcessAvatarInputSystem())
+        engine.addSystem(UpdateAvatarAnimationSystem())
         engine.addSystem(UpdateVisualAnimationSystem())
         engine.addSystem(VisualTilemapRenderSystem())
         engine.addSystem(VisualTextureRenderSystem())
@@ -50,12 +51,14 @@ class Game {
 
         addTilemap()
         addPlayer()
+        addItems()
 
         camera.followTransform = player?.get()
     }
 
     private fun loadAssets() {
         assetManager.load<TextureAtlas>("tiles/tiles.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
+        assetManager.load<TextureAtlas>("items/items.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.load<TextureAtlas>("players/players.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.finishLoading()
     }
@@ -97,6 +100,59 @@ class Game {
         return cameraEntity.get()!!
     }
 
+    private fun addItems() {
+        val itemsAtlas = assetManager.get<TextureAtlas>("items/items.atlas")
+
+        addSimpleItem(itemsAtlas, "rock1", 14.5f, 16f)
+
+        addSimpleItem(itemsAtlas, "rock2", 18.5f, 16f)
+
+        addTree(itemsAtlas, 20.5f, 16f)
+
+        //getRandomPositions().forEach { pos -> addTree(itemsAtlas, pos.x, pos.y) }
+        //getRandomPositions().forEach { pos -> addSimpleItem(itemsAtlas, "rock1", pos.x, pos.y) }
+        //getRandomPositions().forEach { pos -> addSimpleItem(itemsAtlas, "rock2", pos.x, pos.y) }
+    }
+
+    private fun getRandomPositions(amount: Int = 25): Array<Vector2> {
+        val rnd = Random()
+        return Array(amount, { _ -> Vector2(rnd.nextFloat() * 28f + 2f, rnd.nextFloat() * 28f + 2f) })
+    }
+
+    private fun addSimpleItem(itemsAtlas: TextureAtlas, name: String, x: Float, y: Float) {
+        engine.entity {
+            with<Transform> {
+                set(x, y)
+            }
+            with<Collider>()
+            with<VisualTexture> {
+                mainItem.texture = itemsAtlas.findRegion(name)
+                mainItem.setAnchorBottom()
+            }
+        }
+    }
+
+    private fun addTree(itemsAtlas: TextureAtlas, x: Float, y: Float) {
+        engine.entity {
+            with<Transform> {
+                set(x, y)
+            }
+            with<Collider>()
+            with<VisualTexture> {
+                mainItem.height = 2.3f
+                mainItem.width = 2.0f
+                mainItem.texture = itemsAtlas.findRegion("tree-trunk")
+                mainItem.setAnchorBottom()
+                mainItem.offsetY += 0.25f
+
+                add(itemsAtlas.findRegion("tree-leaves"), 3f, 2.5f, 0f, 0f)
+                items[1].setAnchorBottom()
+                items[1].offsetY -= 1.75f
+            }
+        }
+    }
+
+
     private fun addPlayer() {
 
         val playersAtlas = assetManager.get<TextureAtlas>("players/players.atlas")
@@ -105,17 +161,20 @@ class Game {
 
         this.player = engine.entity {
             with<Transform> {
-                set(16.5f, 16.5f)
+                set(16.5f, 16f)
             }
-            with<Movement>()
+            with<Rigidbody>()
             with<VisualTexture> {
-                set(playerRegion, 2f, 2f)
+                set(playerRegion, 2f, 2f, 0f, -0.7f)
             }
             with<VisualAnimation> {
                 set(playerAnimations, "walk-east")
             }
             with<Avatar>()
             with<MainAvatar>()
+            with<Collider> {
+                set(2f, ColliderShape.RECTANGLE)
+            }
         }
     }
 
@@ -151,11 +210,11 @@ class Game {
 
     fun resize(width: Int, height: Int) {
 
-        var scale =  height.toDouble() / REF_HEIGHT_IN_TILES.toDouble()
+        var scale = height.toDouble() / REF_HEIGHT_IN_TILES.toDouble()
 
         scale = roundToNearestPowOfTwo(scale)
 
-        scale  = 1.0 / scale
+        scale = 1.0 / scale
 
         camera.resize((width.toDouble() * scale).toInt(), (height.toDouble() * scale).toInt())
     }

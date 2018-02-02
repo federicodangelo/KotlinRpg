@@ -3,13 +3,13 @@ package com.fangelo.kotlinrpg.game.systems
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.systems.IteratingSystem
 import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
-import com.fangelo.libraries.ashley.components.Movement
+import com.fangelo.libraries.ashley.components.Rigidbody
 import com.fangelo.libraries.ashley.components.VisualAnimation
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
-class AvatarAnimationSystem : IteratingSystem(allOf(Movement::class, MainAvatar::class, VisualAnimation::class).get()) {
-    private val movement = mapperFor<Movement>()
+class UpdateAvatarAnimationSystem : IteratingSystem(allOf(Rigidbody::class, MainAvatar::class, VisualAnimation::class).get()) {
+    private val movement = mapperFor<Rigidbody>()
     private val visualAnimation = mapperFor<VisualAnimation>()
 
     public override fun processEntity(entity: Entity, deltaTime: Float) {

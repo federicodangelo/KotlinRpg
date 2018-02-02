@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.fangelo.rawassets.tasks.AssetBuilderTask;
+import com.fangelo.rawassets.tasks.BuildItemsAtlas;
 import com.fangelo.rawassets.tasks.BuildPlayersAtlas;
 import com.fangelo.rawassets.tasks.BuildTilesAtlas;
 import com.fangelo.rawassets.tasks.BuildUIAtlas;
@@ -21,7 +22,8 @@ public class RawAssetsBuilder extends ApplicationAdapter {
 	public void create() {
 		System.out.println("Building Assets!");
 
-		AssetBuilderTask[] tasks = new AssetBuilderTask[] { new BuildUIAtlas(), new BuildPlayersAtlas(), new BuildTilesAtlas() };
+		AssetBuilderTask[] tasks = new AssetBuilderTask[] { new BuildUIAtlas(), new BuildPlayersAtlas(), new BuildTilesAtlas(),
+				new BuildItemsAtlas() };
 
 		for (AssetBuilderTask task : tasks) {
 			System.out.println();
