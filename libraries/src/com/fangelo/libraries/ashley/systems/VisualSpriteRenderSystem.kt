@@ -12,7 +12,7 @@ import com.fangelo.libraries.ashley.components.VisualSprite
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
-class VisualTextureRenderSystem : EntitySystem() {
+class VisualSpriteRenderSystem : EntitySystem() {
     private lateinit var entities: ImmutableArray<Entity>
     private lateinit var cameras: ImmutableArray<Entity>
     private var sortedEntities = mutableListOf<Entity>()
@@ -21,11 +21,7 @@ class VisualTextureRenderSystem : EntitySystem() {
     private val visual = mapperFor<VisualSprite>()
     private val camera = mapperFor<Camera>()
 
-    private val batch: SpriteBatch
-
-    init {
-        batch = SpriteBatch()
-    }
+    private val batch: SpriteBatch = SpriteBatch()
 
     override fun addedToEngine(engine: Engine) {
         entities = engine.getEntitiesFor(allOf(Transform::class, VisualSprite::class).get())
@@ -36,29 +32,20 @@ class VisualTextureRenderSystem : EntitySystem() {
     }
 
     override fun update(deltaTime: Float) {
-
         sortEntities()
-
         var camera: Camera
-
-        for (c in cameras) {
-            camera = this.camera.get(c)
-
+        for (ec in cameras) {
+            camera = this.camera.get(ec)
             beginRender(camera)
-
             drawEntities()
-
             endRender()
         }
     }
 
     private fun sortEntities() {
-
         sortedEntities.clear()
         sortedEntities.addAll(entities)
         sortedEntities.sortBy { transform.get(it).y }
-
-
     }
 
     private fun drawEntities() {
@@ -81,12 +68,11 @@ class VisualTextureRenderSystem : EntitySystem() {
 
                 if (texture is TextureAtlas.AtlasRegion) {
 
+                    targetX += (texture.offsetX / texture.originalWidth.toFloat()) * width
+                    targetY += (texture.offsetY / texture.originalHeight.toFloat()) * height
+
                     width *= texture.packedWidth.toFloat() / texture.originalWidth.toFloat()
                     height *= texture.packedHeight.toFloat() / texture.originalHeight.toFloat()
-
-                    targetX += texture.offsetX / texture.originalWidth.toFloat()
-                    targetY += texture.offsetY / texture.originalHeight.toFloat()
-
                 }
 
                 batch.draw(texture, targetX, targetY, width, height)

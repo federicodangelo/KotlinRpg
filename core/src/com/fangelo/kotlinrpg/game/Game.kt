@@ -3,6 +3,7 @@ package com.fangelo.kotlinrpg.game
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader
 import com.badlogic.gdx.graphics.g2d.Animation
@@ -14,6 +15,7 @@ import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
 import com.fangelo.kotlinrpg.game.systems.ProcessAvatarInputSystem
 import com.fangelo.kotlinrpg.game.systems.UpdateAvatarAnimationSystem
 import com.fangelo.libraries.ashley.components.*
+import com.fangelo.libraries.ashley.data.ColliderShape
 import com.fangelo.libraries.ashley.data.Sprite
 import com.fangelo.libraries.ashley.systems.*
 import ktx.ashley.entity
@@ -33,6 +35,7 @@ class Game {
     private val camera: Camera
     private var player: Entity? = null
     private val assetManager = AssetManager()
+    private var debugEnabled = false
 
     init {
 
@@ -46,7 +49,8 @@ class Game {
         engine.addSystem(UpdateAvatarAnimationSystem())
         engine.addSystem(UpdateVisualAnimationSystem())
         engine.addSystem(VisualTilemapRenderSystem())
-        engine.addSystem(VisualTextureRenderSystem())
+        engine.addSystem(VisualSpriteRenderSystem())
+        engine.addSystem(VisualDebugCollidersSystem())
 
         resize(Gdx.graphics.width, Gdx.graphics.height)
 
@@ -54,12 +58,24 @@ class Game {
         addPlayer()
         addItems()
 
+        disableDebug()
+
         camera.followTransform = player?.get()
+    }
+
+    private fun disableDebug() {
+        debugEnabled = false
+        engine.getSystem(VisualDebugCollidersSystem::class.java).setProcessing(false)
+    }
+
+    private fun enableDebug() {
+        debugEnabled = true
+        engine.getSystem(VisualDebugCollidersSystem::class.java).setProcessing(true)
     }
 
     private fun loadAssets() {
         assetManager.load<TextureAtlas>("tiles/tiles.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
-        assetManager.load<TextureAtlas>("sprites/sprites.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
+        assetManager.load<TextureAtlas>("items/items.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.load<TextureAtlas>("players/players.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.finishLoading()
     }
@@ -102,7 +118,7 @@ class Game {
     }
 
     private fun addItems() {
-        val itemsAtlas = assetManager.get<TextureAtlas>("sprites/sprites.atlas")
+        val itemsAtlas = assetManager.get<TextureAtlas>("items/items.atlas")
 
         addSimpleItem(itemsAtlas, "rock1", 14.5f, 16f)
 
@@ -125,7 +141,10 @@ class Game {
             with<Transform> {
                 set(x, y)
             }
-            with<Collider>()
+            with<Collider> {
+                height = 0.4f
+                setAnchorBottom()
+            }
             with<VisualSprite> {
                 add(Sprite(itemsAtlas.findRegion(name)).setAnchorBottom())
             }
@@ -137,7 +156,10 @@ class Game {
             with<Transform> {
                 set(x, y)
             }
-            with<Collider>()
+            with<Collider> {
+                set(0.8f, 0.4f)
+                setAnchorBottom()
+            }
             with<VisualSprite> {
                 add(Sprite(itemsAtlas.findRegion("tree-trunk"), 2.0f, 2.3f))
                 sprites[0].setAnchorBottom()
@@ -171,7 +193,7 @@ class Game {
             with<Avatar>()
             with<MainAvatar>()
             with<Collider> {
-                set(2f, ColliderShape.RECTANGLE)
+                set(0.6f, 0.3f, 0f, 0.14f)
             }
         }
     }
@@ -203,6 +225,15 @@ class Game {
     }
 
     fun update(deltaTime: Float) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            if (debugEnabled)
+                disableDebug()
+            else
+                enableDebug()
+        }
+
+
         engine.update(deltaTime)
     }
 

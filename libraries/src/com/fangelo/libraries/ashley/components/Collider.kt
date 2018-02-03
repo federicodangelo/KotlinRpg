@@ -2,14 +2,17 @@ package com.fangelo.libraries.ashley.components
 
 import com.badlogic.ashley.core.Component
 
-enum class ColliderShape {
-    RECTANGLE,
-    CIRCLE
-}
+class Collider(var width: Float = 1f, var height: Float = 1f, var offsetX: Float = 0f, var offsetY: Float = 0f) : Component {
 
-class Collider(var size: Float = 1f, var shape: ColliderShape = ColliderShape.RECTANGLE) : Component {
-    fun set(size: Float = 1f, shape: ColliderShape = ColliderShape.RECTANGLE) {
-        this.size = size
-        this.shape = shape
+    fun set(width: Float = 1f, height: Float = 1f, offsetX: Float = 0f, offsetY: Float = 0f) {
+        this.width = width
+        this.height = height
+        this.offsetX = offsetX
+        this.offsetY = offsetY
+    }
+
+    fun setAnchorBottom(): Collider {
+        offsetY = -height * 0.5f
+        return this
     }
 }
