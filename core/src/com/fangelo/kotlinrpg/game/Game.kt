@@ -14,6 +14,7 @@ import com.fangelo.kotlinrpg.game.components.avatar.MainAvatar
 import com.fangelo.kotlinrpg.game.systems.ProcessAvatarInputSystem
 import com.fangelo.kotlinrpg.game.systems.UpdateAvatarAnimationSystem
 import com.fangelo.libraries.ashley.components.*
+import com.fangelo.libraries.ashley.data.Sprite
 import com.fangelo.libraries.ashley.systems.*
 import ktx.ashley.entity
 import ktx.ashley.get
@@ -58,7 +59,7 @@ class Game {
 
     private fun loadAssets() {
         assetManager.load<TextureAtlas>("tiles/tiles.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
-        assetManager.load<TextureAtlas>("items/items.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
+        assetManager.load<TextureAtlas>("sprites/sprites.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.load<TextureAtlas>("players/players.atlas", TextureAtlasLoader.TextureAtlasParameter(true))
         assetManager.finishLoading()
     }
@@ -101,7 +102,7 @@ class Game {
     }
 
     private fun addItems() {
-        val itemsAtlas = assetManager.get<TextureAtlas>("items/items.atlas")
+        val itemsAtlas = assetManager.get<TextureAtlas>("sprites/sprites.atlas")
 
         addSimpleItem(itemsAtlas, "rock1", 14.5f, 16f)
 
@@ -125,9 +126,8 @@ class Game {
                 set(x, y)
             }
             with<Collider>()
-            with<VisualTexture> {
-                mainItem.texture = itemsAtlas.findRegion(name)
-                mainItem.setAnchorBottom()
+            with<VisualSprite> {
+                add(Sprite(itemsAtlas.findRegion(name)).setAnchorBottom())
             }
         }
     }
@@ -138,16 +138,14 @@ class Game {
                 set(x, y)
             }
             with<Collider>()
-            with<VisualTexture> {
-                mainItem.height = 2.3f
-                mainItem.width = 2.0f
-                mainItem.texture = itemsAtlas.findRegion("tree-trunk")
-                mainItem.setAnchorBottom()
-                mainItem.offsetY += 0.25f
+            with<VisualSprite> {
+                add(Sprite(itemsAtlas.findRegion("tree-trunk"), 2.0f, 2.3f))
+                sprites[0].setAnchorBottom()
+                sprites[0].offsetY += 0.25f
 
-                add(itemsAtlas.findRegion("tree-leaves"), 3f, 2.5f, 0f, 0f)
-                items[1].setAnchorBottom()
-                items[1].offsetY -= 1.75f
+                add(Sprite(itemsAtlas.findRegion("tree-leaves"), 3f, 2.5f, 0f, 0f))
+                sprites[1].setAnchorBottom()
+                sprites[1].offsetY -= 1.75f
             }
         }
     }
@@ -164,8 +162,8 @@ class Game {
                 set(16.5f, 16f)
             }
             with<Rigidbody>()
-            with<VisualTexture> {
-                set(playerRegion, 2f, 2f, 0f, -0.7f)
+            with<VisualSprite> {
+                add(Sprite(playerRegion, 2f, 2f, 0f, -0.7f))
             }
             with<VisualAnimation> {
                 set(playerAnimations, "walk-east")

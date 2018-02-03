@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.fangelo.libraries.ashley.components.Camera
 import com.fangelo.libraries.ashley.components.Transform
-import com.fangelo.libraries.ashley.components.VisualTexture
+import com.fangelo.libraries.ashley.components.VisualSprite
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
@@ -18,7 +18,7 @@ class VisualTextureRenderSystem : EntitySystem() {
     private var sortedEntities = mutableListOf<Entity>()
 
     private val transform = mapperFor<Transform>()
-    private val visual = mapperFor<VisualTexture>()
+    private val visual = mapperFor<VisualSprite>()
     private val camera = mapperFor<Camera>()
 
     private val batch: SpriteBatch
@@ -28,7 +28,7 @@ class VisualTextureRenderSystem : EntitySystem() {
     }
 
     override fun addedToEngine(engine: Engine) {
-        entities = engine.getEntitiesFor(allOf(Transform::class, VisualTexture::class).get())
+        entities = engine.getEntitiesFor(allOf(Transform::class, VisualSprite::class).get())
         cameras = engine.getEntitiesFor(allOf(Camera::class).get())
     }
 
@@ -63,14 +63,14 @@ class VisualTextureRenderSystem : EntitySystem() {
 
     private fun drawEntities() {
         var transform: Transform
-        var visualTexture: VisualTexture
+        var visualSprite: VisualSprite
 
         for (e in sortedEntities) {
 
             transform = this.transform.get(e)
-            visualTexture = this.visual.get(e)
+            visualSprite = this.visual.get(e)
 
-            for (item in visualTexture.items) {
+            for (item in visualSprite.sprites) {
 
                 val texture = item.texture
 

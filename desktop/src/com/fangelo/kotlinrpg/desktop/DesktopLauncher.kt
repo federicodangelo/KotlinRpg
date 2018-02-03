@@ -3,7 +3,6 @@ package com.fangelo.kotlinrpg.desktop
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import com.fangelo.kotlinrpg.MyGdxGame
-import com.fangelo.kotlinrpg.PlatformAdapter
 
 object DesktopLauncher {
     @JvmStatic
