@@ -33,7 +33,7 @@ abstract class Dialog(title: String) {
         return this
     }
 
-    fun close(result : DialogResult) {
+    fun close(result: DialogResult) {
         if (!gdxDialog.closing) {
             ScreenManager.internalDialogClosed(this)
             onClosed(result)
@@ -51,12 +51,15 @@ abstract class Dialog(title: String) {
             gdxDialog.show(manager.stage)
         } else {
             gdxDialog.show(manager.stage, null)
-            gdxDialog.setPosition(Math.round((ScreenManager.stage.width - gdxDialog.width) / 2).toFloat(), Math.round((ScreenManager.stage.height - gdxDialog.height) / 2).toFloat())
+            gdxDialog.setPosition(
+                Math.round((ScreenManager.stage.width - gdxDialog.width) / 2).toFloat(),
+                Math.round((ScreenManager.stage.height - gdxDialog.height) / 2).toFloat()
+            )
         }
     }
 
     private class CustomGdxDialog(val dialog: Dialog, title: String, skin: Skin, windowStyleName: String) :
-            com.badlogic.gdx.scenes.scene2d.ui.Dialog(title, skin, windowStyleName) {
+        com.badlogic.gdx.scenes.scene2d.ui.Dialog(title, skin, windowStyleName) {
 
         var closing = false
 

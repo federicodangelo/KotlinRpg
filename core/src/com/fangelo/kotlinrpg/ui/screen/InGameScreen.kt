@@ -41,23 +41,23 @@ class InGameScreen : Screen() {
         container.height = height
 
         topLeftContainer.setPosition(
-                (-container.width / 2 + topLeftContainer.prefWidth / 2).toInt().toFloat(),
-                (container.height / 2 - topLeftContainer.prefHeight / 2).toInt().toFloat()
+            (-container.width / 2 + topLeftContainer.prefWidth / 2).toInt().toFloat(),
+            (container.height / 2 - topLeftContainer.prefHeight / 2).toInt().toFloat()
         )
 
         topRightContainer.setPosition(
-                (container.width / 2 - topRightContainer.prefWidth / 2).toInt().toFloat(),
-                (container.height / 2 - topRightContainer.prefHeight / 2).toInt().toFloat()
+            (container.width / 2 - topRightContainer.prefWidth / 2).toInt().toFloat(),
+            (container.height / 2 - topRightContainer.prefHeight / 2).toInt().toFloat()
         )
 
         bottomLeftContainer.setPosition(
-                (-container.width / 2 + bottomLeftContainer.prefWidth / 2).toInt().toFloat(),
-                (-container.height / 2 + bottomLeftContainer.prefHeight / 2).toInt().toFloat()
+            (-container.width / 2 + bottomLeftContainer.prefWidth / 2).toInt().toFloat(),
+            (-container.height / 2 + bottomLeftContainer.prefHeight / 2).toInt().toFloat()
         )
 
         bottomRightContainer.setPosition(
-                (container.width / 2 - bottomRightContainer.prefWidth / 2).toInt().toFloat(),
-                (-container.height / 2 + bottomRightContainer.prefHeight / 2).toInt().toFloat()
+            (container.width / 2 - bottomRightContainer.prefWidth / 2).toInt().toFloat(),
+            (-container.height / 2 + bottomRightContainer.prefHeight / 2).toInt().toFloat()
         )
     }
 

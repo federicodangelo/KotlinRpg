@@ -51,4 +51,10 @@ class Camera : Component {
             }
             return camera.combined
         }
+
+    val viewportWidth: Float
+        get() = camera.viewportWidth
+
+    val viewportHeight: Float
+        get() = camera.viewportHeight
 }

@@ -13,6 +13,7 @@ import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
 class VisualTilemapRenderSystem : EntitySystem() {
+
     private lateinit var entities: ImmutableArray<Entity>
     private lateinit var cameras: ImmutableArray<Entity>
 
@@ -22,6 +23,7 @@ class VisualTilemapRenderSystem : EntitySystem() {
     private val camera = mapperFor<Camera>()
 
     private val batch: SpriteBatch
+    private val renderBoundsCalculator = VisualTilemapRenderBoundsCalculator()
 
     init {
         batch = SpriteBatch()
@@ -40,40 +42,52 @@ class VisualTilemapRenderSystem : EntitySystem() {
     override fun update(deltaTime: Float) {
 
         var camera: Camera
+        var transform: Transform
 
         for (c in cameras) {
             camera = this.camera.get(c)
+            transform = this.transform.get(c)
 
             beginRender(camera)
 
-            drawTilemaps()
+            drawTilemaps(camera, transform)
 
             endRender()
         }
     }
 
-    private fun drawTilemaps() {
-        var transform: Transform
+    private fun drawTilemaps(camera: Camera, cameraTransform: Transform) {
         var tilemap: Tilemap
+        var tilemapTransform: Transform
         var visualTileset: VisualTileset
 
         for (e in entities) {
 
-            transform = this.transform.get(e)
             tilemap = this.tilemap.get(e)
+            tilemapTransform = this.transform.get(e)
             visualTileset = this.visualTileset.get(e)
 
-            val offsetX = transform.x
-            val offsetY = transform.y
+            val bounds = renderBoundsCalculator.calculate(camera, cameraTransform, tilemap, tilemapTransform)
 
-            for (y in 0 until tilemap.sizeY) {
-                for (x in 0 until tilemap.sizeX) {
-                    val tile = tilemap.getTile(x, y)
-                    val tileTexture = visualTileset.getTileTexture(tile)
+            drawFloor(bounds, tilemap, visualTileset)
+        }
+    }
 
-                    batch.draw(tileTexture, offsetX + x, offsetY + y, 1f, 1f)
-                }
+    private fun drawFloor(bounds: VisualTilemapRenderBounds, tilemap: Tilemap, visualTileset: VisualTileset) {
+        val renderOffsetX = bounds.renderOffsetX.toFloat()
+
+        var drawY = bounds.renderOffsetY.toFloat()
+
+        batch.disableBlending()
+        for (mapX in bounds.fromY until bounds.toY) {
+            var drawX = renderOffsetX
+            for (mapY in bounds.fromX until bounds.toX) {
+                val tile = tilemap.getTile(mapX, mapY)
+                val tileTexture = visualTileset.getTileTexture(tile)
+                batch.draw(tileTexture, drawX, drawY, 1f, 1f)
+                drawX++
             }
+            drawY++
         }
     }
 

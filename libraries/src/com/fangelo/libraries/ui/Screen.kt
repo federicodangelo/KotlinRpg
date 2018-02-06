@@ -13,10 +13,10 @@ abstract class Screen {
 
     private val mainTable: CustomTable
 
-    val width : Float
+    val width: Float
         get() = mainTable.width
 
-    val height : Float
+    val height: Float
         get() = mainTable.height
 
     init {
@@ -52,7 +52,7 @@ abstract class Screen {
         //Called when the screen is resized
     }
 
-    protected open fun onUpdate(deltaTime : Float) {
+    protected open fun onUpdate(deltaTime: Float) {
 
     }
 

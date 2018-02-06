@@ -70,8 +70,11 @@ class UpdatePhysicsSystem : EntitySystem() {
             if (otherCollider == collider)
                 continue
 
-            if (checkCollision(collider, newX + collider.offsetX, newY + collider.offsetY,
-                            otherCollider, otherTransform.x + otherCollider.offsetX, otherTransform.y + otherCollider.offsetY))
+            if (checkCollision(
+                    collider, newX + collider.offsetX, newY + collider.offsetY,
+                    otherCollider, otherTransform.x + otherCollider.offsetX, otherTransform.y + otherCollider.offsetY
+                )
+            )
                 return true
         }
 

@@ -2,30 +2,30 @@ package com.fangelo.libraries.ashley.components
 
 import com.badlogic.ashley.core.Component
 
-class Tilemap(sizeX: Int = 0, sizeY: Int = 0, tiles: Array<Int> = arrayOf()) : Component {
-    var sizeX: Int = sizeX
+class Tilemap(width: Int = 0, height: Int = 0, tiles: Array<Int> = arrayOf()) : Component {
+    var width: Int = width
         private set
 
-    var sizeY: Int = sizeY
+    var height: Int = height
         private set
 
     var tiles: Array<Int> = tiles
         private set
 
-    fun getTile(x: Int, y: Int) = tiles[y * sizeX + x]
+    fun getTile(x: Int, y: Int) = tiles[y * width + x]
 
-    fun set(sizeX: Int, sizeY: Int, tiles: Array<Int>): Tilemap {
-        this.sizeX = sizeX
-        this.sizeY = sizeY
+    fun set(width: Int, height: Int, tiles: Array<Int>): Tilemap {
+        this.width = width
+        this.height = height
         this.tiles = tiles
-        if (tiles.size != sizeX * sizeY)
-            throw Exception("Invalid tiles array size, it's ${tiles.size} and should be ${sizeX * sizeY}")
+        if (tiles.size != width * height)
+            throw Exception("Invalid tiles array size, it's ${tiles.size} and should be ${width * height}")
 
         return this
     }
 
     init {
-        if (tiles.size != sizeX * sizeY)
-            throw Exception("Invalid tiles array size, it's ${tiles.size} and should be ${sizeX * sizeY}")
+        if (tiles.size != width * height)
+            throw Exception("Invalid tiles array size, it's ${tiles.size} and should be ${width * height}")
     }
 }
