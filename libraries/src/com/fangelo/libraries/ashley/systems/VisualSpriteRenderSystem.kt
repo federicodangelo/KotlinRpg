@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.fangelo.libraries.ashley.components.Camera
 import com.fangelo.libraries.ashley.components.Transform
 import com.fangelo.libraries.ashley.components.VisualSprite
+import com.fangelo.libraries.utils.MutableListUtils
 import ktx.ashley.allOf
 import ktx.ashley.mapperFor
 
@@ -45,19 +46,40 @@ class VisualSpriteRenderSystem : EntitySystem() {
     private fun sortEntities() {
         sortedEntities.clear()
         sortedEntities.addAll(entities)
-        sortedEntities.sortBy { transform.get(it).y }
+        //sortedEntities.sortWith(EntitiesSorterByY)
+        MutableListUtils.nonAllocatingSort(sortedEntities, EntitiesSorterByY)
+    }
+
+    companion object EntitiesSorterByY : Comparator<Entity> {
+
+        private val transform = mapperFor<Transform>()
+
+        override fun compare(a: Entity, b: Entity): Int {
+
+            val y1 = transform.get(a).y
+            val y2 = transform.get(b).y
+
+            if (y1 > y2)
+                return 1
+            else if (y1 < y2)
+                return -1
+
+            return 0
+        }
     }
 
     private fun drawEntities() {
         var transform: Transform
         var visualSprite: VisualSprite
 
-        for (e in sortedEntities) {
+        for (index in 0 until sortedEntities.size) {
+            val e = sortedEntities[index]
 
             transform = this.transform.get(e)
             visualSprite = this.visual.get(e)
 
-            for (item in visualSprite.sprites) {
+            for (spriteIndex in 0 until visualSprite.sprites.size) {
+                val item = visualSprite.sprites[spriteIndex]
 
                 val texture = item.texture
 

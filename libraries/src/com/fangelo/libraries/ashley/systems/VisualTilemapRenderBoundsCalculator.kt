@@ -8,7 +8,9 @@ class VisualTilemapRenderBoundsCalculator {
 
     private val EXTRA_TILES_TO_DRAW = 2
 
-    fun calculate(camera: Camera, cameraTransform: Transform, tilemap: Tilemap, tilemapTransform: Transform): VisualTilemapRenderBounds {
+    fun calculate(
+        camera: Camera, cameraTransform: Transform, tilemap: Tilemap, tilemapTransform: Transform, toReturn: VisualTilemapRenderBounds? = null
+    ): VisualTilemapRenderBounds {
 
         val viewPortWidth = camera.viewportWidth * camera.zoom + EXTRA_TILES_TO_DRAW * 2
         val viewPortHeight = camera.viewportHeight * camera.zoom + EXTRA_TILES_TO_DRAW * 2
@@ -38,7 +40,16 @@ class VisualTilemapRenderBoundsCalculator {
         val renderOffsetX = fromX + offsetX
         val renderOffsetY = fromY + offsetY
 
+        if (toReturn != null) {
+            toReturn.fromX = fromX
+            toReturn.toX = toX
+            toReturn.fromY = fromY
+            toReturn.toY = toY
+            toReturn.renderOffsetX = renderOffsetX
+            toReturn.renderOffsetY = renderOffsetY
+            return toReturn
+        }
+
         return VisualTilemapRenderBounds(fromX, toX, fromY, toY, renderOffsetX, renderOffsetY)
     }
-
 }

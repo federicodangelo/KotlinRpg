@@ -15,28 +15,30 @@ class ProcessAvatarInputSystem : IteratingSystem(allOf(Rigidbody::class, Avatar:
     private val movement = mapperFor<Rigidbody>()
     private val avatar = mapperFor<Avatar>()
 
+    private val tmpVelocity = vec2()
+
     public override fun processEntity(entity: Entity, deltaTime: Float) {
         val movement = movement.get(entity)
         val avatar = avatar.get(entity)
 
-        val velocity = vec2()
+        tmpVelocity.setZero()
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            velocity.x += avatar.walkSpeed
+            tmpVelocity.x += avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            velocity.x += -avatar.walkSpeed
+            tmpVelocity.x += -avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            velocity.y += -avatar.walkSpeed
+            tmpVelocity.y += -avatar.walkSpeed
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            velocity.y += avatar.walkSpeed
+            tmpVelocity.y += avatar.walkSpeed
 
-        if (!velocity.isZero)
-            velocity.nor().scl(avatar.walkSpeed)
+        if (!tmpVelocity.isZero)
+            tmpVelocity.nor().scl(avatar.walkSpeed)
 
-        movement.velocityX = velocity.x
-        movement.velocityY = velocity.y
+        movement.velocityX = tmpVelocity.x
+        movement.velocityY = tmpVelocity.y
     }
 }

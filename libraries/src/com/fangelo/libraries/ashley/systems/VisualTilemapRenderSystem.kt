@@ -56,6 +56,8 @@ class VisualTilemapRenderSystem : EntitySystem() {
         }
     }
 
+    private val tmpBounds = VisualTilemapRenderBounds()
+
     private fun drawTilemaps(camera: Camera, cameraTransform: Transform) {
         var tilemap: Tilemap
         var tilemapTransform: Transform
@@ -67,7 +69,7 @@ class VisualTilemapRenderSystem : EntitySystem() {
             tilemapTransform = this.transform.get(e)
             visualTileset = this.visualTileset.get(e)
 
-            val bounds = renderBoundsCalculator.calculate(camera, cameraTransform, tilemap, tilemapTransform)
+            val bounds = renderBoundsCalculator.calculate(camera, cameraTransform, tilemap, tilemapTransform, tmpBounds)
 
             drawFloor(bounds, tilemap, visualTileset)
         }
