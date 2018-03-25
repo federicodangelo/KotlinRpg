@@ -14,6 +14,7 @@ object DesktopLauncher {
 
         config.width = 768 //portrait!
         config.height = 1366
+        config.forceExit = false //prevents error report by gradle after finishing running / debugging
 
         DesktopPlatformAdapter()
         LwjglApplication(MyGdxGame(), config)

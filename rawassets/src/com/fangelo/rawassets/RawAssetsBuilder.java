@@ -15,6 +15,7 @@ public class RawAssetsBuilder extends ApplicationAdapter {
 	public static void main(String[] args) {
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.forceExit = false;
 		new LwjglApplication(new RawAssetsBuilder(), config);
 	}
 
@@ -22,8 +23,12 @@ public class RawAssetsBuilder extends ApplicationAdapter {
 	public void create() {
 		System.out.println("Building Assets!");
 
-		AssetBuilderTask[] tasks = new AssetBuilderTask[] { new BuildUIAtlas(), new BuildPlayersAtlas(), new BuildTilesAtlas(),
-				new BuildItemsAtlas() };
+		AssetBuilderTask[] tasks = new AssetBuilderTask[] { //
+				new BuildUIAtlas(), //
+				new BuildPlayersAtlas(), //
+				new BuildTilesAtlas(), //
+				new BuildItemsAtlas() //
+		};
 
 		for (AssetBuilderTask task : tasks) {
 			System.out.println();

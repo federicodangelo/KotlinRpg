@@ -9,6 +9,7 @@ import com.badlogic.gdx.assets.loaders.TextureAtlasLoader
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.fangelo.kotlinrpg.game.systems.ProcessAvatarInputSystem
 import com.fangelo.kotlinrpg.game.systems.UpdateAvatarAnimationSystem
+import com.fangelo.kotlinrpg.game.world.WorldBuilder
 import com.fangelo.libraries.ashley.components.Camera
 import com.fangelo.libraries.ashley.components.Transform
 import com.fangelo.libraries.ashley.systems.*
@@ -35,6 +36,26 @@ class Game {
 
         camera = addCamera()
 
+        initEngineSystems()
+
+        resize(Gdx.graphics.width, Gdx.graphics.height)
+
+        val worldBuilder = buildWorld()
+
+        this.player = worldBuilder.player
+
+        disableDebug()
+
+        camera.followTransform = player?.get()
+    }
+
+    private fun buildWorld(): WorldBuilder {
+        val worldBuilder = WorldBuilder()
+        worldBuilder.build(engine, assetManager)
+        return worldBuilder
+    }
+
+    private fun initEngineSystems() {
         engine.addSystem(UpdatePhysicsSystem())
         engine.addSystem(UpdateCameraSystem())
         engine.addSystem(ProcessAvatarInputSystem())
@@ -43,18 +64,6 @@ class Game {
         engine.addSystem(VisualTilemapRenderSystem())
         engine.addSystem(VisualSpriteRenderSystem())
         engine.addSystem(VisualDebugCollidersSystem())
-
-        resize(Gdx.graphics.width, Gdx.graphics.height)
-
-        val worldBuilder = WorldBuilder()
-
-        worldBuilder.build(engine, assetManager)
-
-        this.player = worldBuilder.player
-
-        disableDebug()
-
-        camera.followTransform = player?.get()
     }
 
     private fun disableDebug() {

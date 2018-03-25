@@ -1,4 +1,4 @@
-package com.fangelo.kotlinrpg.game
+package com.fangelo.kotlinrpg.game.world
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
